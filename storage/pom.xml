@@ -9,26 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rest</artifactId>
+    <artifactId>storage</artifactId>
     <version>${departure-times.version}</version>
 
-
     <dependencies>
-        <!--Simple framework-->
         <dependency>
-            <groupId>org.simpleframework</groupId>
-            <artifactId>simple-http</artifactId>
-            <version>${simpleframework.version}</version>
+          <groupId>com.javadocmd</groupId>
+          <artifactId>simplelatlng</artifactId>
+          <version>${simplelatlng.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>org.simpleframework</groupId>
-            <artifactId>simple-common</artifactId>
-            <version>${simpleframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.simpleframework</groupId>
-            <artifactId>simple-transport</artifactId>
-            <version>${simpleframework.version}</version>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
         </dependency>
 
         <dependency>
@@ -37,11 +31,18 @@
             <version>${departure-times.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
-        <simpleframework.version>6.0.1</simpleframework.version>
+        <simplelatlng.version>RELEASE</simplelatlng.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <guava.version>18.0</guava.version>
     </properties>
-
 
 </project>

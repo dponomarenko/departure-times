@@ -5,11 +5,12 @@
     <parent>
         <artifactId>departure-times</artifactId>
         <groupId>com.uber.departure.times</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${departure-times.version}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common</artifactId>
+    <version>${departure-times.version}</version>
 
 
 </project>
