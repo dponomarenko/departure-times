@@ -1,0 +1,434 @@
+{
+  "route": [
+    {
+      "title": "B",
+      "tag": "B"
+    },
+    {
+      "title": "Broadway Shuttle Day",
+      "tag": "BSD"
+    },
+    {
+      "title": "Broadway Shuttle Night",
+      "tag": "BSN"
+    },
+    {
+      "title": "C",
+      "tag": "C"
+    },
+    {
+      "title": "CB",
+      "tag": "CB"
+    },
+    {
+      "title": "E",
+      "tag": "E"
+    },
+    {
+      "title": "F",
+      "tag": "F"
+    },
+    {
+      "title": "FS",
+      "tag": "FS"
+    },
+    {
+      "title": "G",
+      "tag": "G"
+    },
+    {
+      "title": "H",
+      "tag": "H"
+    },
+    {
+      "title": "J",
+      "tag": "J"
+    },
+    {
+      "title": "L",
+      "tag": "L"
+    },
+    {
+      "title": "LA",
+      "tag": "LA"
+    },
+    {
+      "title": "LC",
+      "tag": "LC"
+    },
+    {
+      "title": "M",
+      "tag": "M"
+    },
+    {
+      "title": "NL",
+      "tag": "NL"
+    },
+    {
+      "title": "NX",
+      "tag": "NX"
+    },
+    {
+      "title": "NXC",
+      "tag": "NXC"
+    },
+    {
+      "title": "NX1",
+      "tag": "NX1"
+    },
+    {
+      "title": "NX2",
+      "tag": "NX2"
+    },
+    {
+      "title": "NX3",
+      "tag": "NX3"
+    },
+    {
+      "title": "NX4",
+      "tag": "NX4"
+    },
+    {
+      "title": "O",
+      "tag": "O"
+    },
+    {
+      "title": "OX",
+      "tag": "OX"
+    },
+    {
+      "title": "P",
+      "tag": "P"
+    },
+    {
+      "title": "S",
+      "tag": "S"
+    },
+    {
+      "title": "SB",
+      "tag": "SB"
+    },
+    {
+      "title": "U",
+      "tag": "U"
+    },
+    {
+      "title": "V",
+      "tag": "V"
+    },
+    {
+      "title": "W",
+      "tag": "W"
+    },
+    {
+      "title": "Z",
+      "tag": "Z"
+    },
+    {
+      "title": "1",
+      "tag": "1"
+    },
+    {
+      "title": "1R",
+      "tag": "1R"
+    },
+    {
+      "title": "7",
+      "tag": "7"
+    },
+    {
+      "title": "11",
+      "tag": "11"
+    },
+    {
+      "title": "12",
+      "tag": "12"
+    },
+    {
+      "title": "14",
+      "tag": "14"
+    },
+    {
+      "title": "18",
+      "tag": "18"
+    },
+    {
+      "title": "20",
+      "tag": "20"
+    },
+    {
+      "title": "21",
+      "tag": "21"
+    },
+    {
+      "title": "22",
+      "tag": "22"
+    },
+    {
+      "title": "25",
+      "tag": "25"
+    },
+    {
+      "title": "26",
+      "tag": "26"
+    },
+    {
+      "title": "31",
+      "tag": "31"
+    },
+    {
+      "title": "32",
+      "tag": "32"
+    },
+    {
+      "title": "37",
+      "tag": "37"
+    },
+    {
+      "title": "39",
+      "tag": "39"
+    },
+    {
+      "title": "40",
+      "tag": "40"
+    },
+    {
+      "title": "45",
+      "tag": "45"
+    },
+    {
+      "title": "46",
+      "tag": "46"
+    },
+    {
+      "title": "46L",
+      "tag": "46L"
+    },
+    {
+      "title": "47",
+      "tag": "47"
+    },
+    {
+      "title": "48",
+      "tag": "48"
+    },
+    {
+      "title": "49",
+      "tag": "49"
+    },
+    {
+      "title": "51A",
+      "tag": "51A"
+    },
+    {
+      "title": "51B",
+      "tag": "51B"
+    },
+    {
+      "title": "52",
+      "tag": "52"
+    },
+    {
+      "title": "54",
+      "tag": "54"
+    },
+    {
+      "title": "57",
+      "tag": "57"
+    },
+    {
+      "title": "58L",
+      "tag": "58L"
+    },
+    {
+      "title": "60",
+      "tag": "60"
+    },
+    {
+      "title": "62",
+      "tag": "62"
+    },
+    {
+      "title": "65",
+      "tag": "65"
+    },
+    {
+      "title": "67",
+      "tag": "67"
+    },
+    {
+      "title": "70",
+      "tag": "70"
+    },
+    {
+      "title": "71",
+      "tag": "71"
+    },
+    {
+      "title": "72",
+      "tag": "72"
+    },
+    {
+      "title": "72M",
+      "tag": "72M"
+    },
+    {
+      "title": "72R",
+      "tag": "72R"
+    },
+    {
+      "title": "73",
+      "tag": "73"
+    },
+    {
+      "title": "74",
+      "tag": "74"
+    },
+    {
+      "title": "75",
+      "tag": "75"
+    },
+    {
+      "title": "76",
+      "tag": "76"
+    },
+    {
+      "title": "83",
+      "tag": "83"
+    },
+    {
+      "title": "85",
+      "tag": "85"
+    },
+    {
+      "title": "86",
+      "tag": "86"
+    },
+    {
+      "title": "88",
+      "tag": "88"
+    },
+    {
+      "title": "89",
+      "tag": "89"
+    },
+    {
+      "title": "93",
+      "tag": "93"
+    },
+    {
+      "title": "94",
+      "tag": "94"
+    },
+    {
+      "title": "95",
+      "tag": "95"
+    },
+    {
+      "title": "97",
+      "tag": "97"
+    },
+    {
+      "title": "98",
+      "tag": "98"
+    },
+    {
+      "title": "99",
+      "tag": "99"
+    },
+    {
+      "title": "200",
+      "tag": "200"
+    },
+    {
+      "title": "210",
+      "tag": "210"
+    },
+    {
+      "title": "212",
+      "tag": "212"
+    },
+    {
+      "title": "215",
+      "tag": "215"
+    },
+    {
+      "title": "216",
+      "tag": "216"
+    },
+    {
+      "title": "217",
+      "tag": "217"
+    },
+    {
+      "title": "232",
+      "tag": "232"
+    },
+    {
+      "title": "239",
+      "tag": "239"
+    },
+    {
+      "title": "251",
+      "tag": "251"
+    },
+    {
+      "title": "275",
+      "tag": "275"
+    },
+    {
+      "title": "314",
+      "tag": "314"
+    },
+    {
+      "title": "339",
+      "tag": "339"
+    },
+    {
+      "title": "356",
+      "tag": "356"
+    },
+    {
+      "title": "376",
+      "tag": "376"
+    },
+    {
+      "title": "386",
+      "tag": "386"
+    },
+    {
+      "title": "687",
+      "tag": "687"
+    },
+    {
+      "title": "691 Skyline/Montclair/Snake Rd",
+      "shortTitle": "691",
+      "tag": "691"
+    },
+    {
+      "title": "800",
+      "tag": "800"
+    },
+    {
+      "title": "801",
+      "tag": "801"
+    },
+    {
+      "title": "802",
+      "tag": "802"
+    },
+    {
+      "title": "805",
+      "tag": "805"
+    },
+    {
+      "title": "840",
+      "tag": "840"
+    },
+    {
+      "title": "851",
+      "tag": "851"
+    }
+  ],
+  "copyright": "All data copyright AC Transit 2016."
+}

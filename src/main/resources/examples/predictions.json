@@ -1,0 +1,82 @@
+{
+  "predictions": {
+    "message": [
+      {
+        "text": "We're on Twitter: @sfmta_muni",
+        "priority": "Low"
+      },
+      {
+        "text": "1/23 - 2/12: Svc changes, detours downtown for Super Bowl events",
+        "priority": "Normal"
+      },
+      {
+        "text": "Visit sfmta.com for email & text alerts",
+        "priority": "Low"
+      }
+    ],
+    "agencyTitle": "SF Muni",
+    "routeTag": "N",
+    "routeTitle": "N-Judah",
+    "direction": {
+      "title": "Outbound to Ocean Beach via Downtown",
+      "prediction": [
+        {
+          "isDeparture": "false",
+          "minutes": "1",
+          "seconds": "92",
+          "tripTag": "6725221",
+          "vehicle": "1499",
+          "block": "9715",
+          "dirTag": "N____O_F10",
+          "epochTime": "1455030113583"
+        },
+        {
+          "isDeparture": "false",
+          "minutes": "9",
+          "seconds": "548",
+          "tripTag": "6724983",
+          "vehicle": "1461",
+          "block": "9702",
+          "dirTag": "N____O_F00",
+          "epochTime": "1455030569429",
+          "vehiclesInConsist": "2"
+        },
+        {
+          "isDeparture": "false",
+          "minutes": "11",
+          "seconds": "667",
+          "tripTag": "6725204",
+          "vehicle": "1466",
+          "block": "9716",
+          "dirTag": "N____O_F10",
+          "epochTime": "1455030689153",
+          "vehiclesInConsist": "2"
+        },
+        {
+          "isDeparture": "false",
+          "minutes": "19",
+          "seconds": "1172",
+          "tripTag": "6724984",
+          "vehicle": "1481",
+          "block": "9703",
+          "dirTag": "N____O_F00",
+          "epochTime": "1455031194016",
+          "vehiclesInConsist": "2"
+        },
+        {
+          "isDeparture": "false",
+          "minutes": "31",
+          "seconds": "1872",
+          "tripTag": "6724985",
+          "vehicle": "1431",
+          "block": "9717",
+          "dirTag": "N____O_F10",
+          "epochTime": "1455031893559"
+        }
+      ]
+    },
+    "stopTitle": "Judah St & 28th Ave",
+    "stopTag": "5205"
+  },
+  "copyright": "All data copyright San Francisco Muni 2016."
+}

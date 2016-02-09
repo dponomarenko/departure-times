@@ -7,20 +7,8 @@
     <artifactId>departure-times</artifactId>
     <groupId>com.uber.departure.times</groupId>
     <version>${departure-times.version}</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>rest</module>
-        <module>common</module>
-        <module>storage</module>
-    </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>annotations</artifactId>
@@ -32,6 +20,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${jul2slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -46,19 +39,35 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--Configuration-->
+        <!--Vert.x-->
         <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>${commons.configuration.version}</version>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-hazelcast</artifactId>
+            <version>${vertx.version}</version>
         </dependency>
 
-        <!--Apache commons-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
+
+
     </dependencies>
 
     <properties>
@@ -68,11 +77,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!--Dependencies versions-->
-        <springframework.version>4.2.4.RELEASE</springframework.version>
         <intellij.annotations.version>12.0</intellij.annotations.version>
         <logback.version>1.0.1</logback.version>
         <slf4j.version>1.6.4</slf4j.version>
-        <commons.configuration.version>1.10</commons.configuration.version>
+        <jul2slf4j.version>1.7.14</jul2slf4j.version>
+
+        <vertx.version>3.2.1</vertx.version>
+
+        <guava.version>18.0</guava.version>
         <commons-lang3.version>3.4</commons-lang3.version>
     </properties>
 

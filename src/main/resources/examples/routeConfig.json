@@ -1,0 +1,703 @@
+{
+  "route": {
+    "latMax": "37.7932299",
+    "stop": [
+      {
+        "lon": "-122.42941",
+        "title": "Duboce Ave & Church St",
+        "stopId": "14447",
+        "tag": "4447",
+        "lat": "37.7694699"
+      },
+      {
+        "lon": "-122.43369",
+        "title": "Sunset Tunnel East Portal",
+        "stopId": "17252",
+        "tag": "7252",
+        "lat": "37.7693899"
+      },
+      {
+        "lon": "-122.4497999",
+        "title": "Carl St & Cole St",
+        "stopId": "13909",
+        "tag": "3909",
+        "lat": "37.7658599"
+      },
+      {
+        "lon": "-122.45259",
+        "title": "Carl St & Stanyan St",
+        "stopId": "13914",
+        "tag": "3914",
+        "lat": "37.7654999"
+      },
+      {
+        "lon": "-122.45656",
+        "title": "Carl St & Hillway Ave",
+        "stopId": "13912",
+        "tag": "3912",
+        "lat": "37.7649999"
+      },
+      {
+        "lon": "-122.45864",
+        "title": "Irving St & 2nd Ave",
+        "stopId": "15118",
+        "tag": "5118",
+        "lat": "37.7644399"
+      },
+      {
+        "lon": "-122.4608199",
+        "title": "Irving St & 4th Ave",
+        "stopId": "15119",
+        "tag": "5119",
+        "lat": "37.7643"
+      },
+      {
+        "lon": "-122.4640299",
+        "title": "Irving St & 7th Ave",
+        "stopId": "15121",
+        "tag": "5121",
+        "lat": "37.76416"
+      },
+      {
+        "lon": "-122.46616",
+        "title": "Irving St & 9th Ave",
+        "stopId": "15123",
+        "tag": "5123",
+        "lat": "37.7641099"
+      },
+      {
+        "lon": "-122.46669",
+        "title": "Judah St & 9th Ave",
+        "stopId": "15193",
+        "tag": "5193",
+        "lat": "37.7622299"
+      },
+      {
+        "lon": "-122.4693199",
+        "title": "Judah St & 12th Ave",
+        "stopId": "15195",
+        "tag": "5195",
+        "lat": "37.76207"
+      },
+      {
+        "lon": "-122.47033",
+        "title": "Judah St & Funston Ave",
+        "stopId": "15219",
+        "tag": "5219",
+        "lat": "37.7620799"
+      },
+      {
+        "lon": "-122.4737799",
+        "title": "Judah St & 16th Ave",
+        "stopId": "15198",
+        "tag": "5198",
+        "lat": "37.76191"
+      },
+      {
+        "lon": "-122.47682",
+        "title": "Judah St & 19th Ave",
+        "stopId": "15199",
+        "tag": "5199",
+        "lat": "37.7617399"
+      },
+      {
+        "lon": "-122.4811599",
+        "title": "Judah St & 23rd Ave",
+        "stopId": "15202",
+        "tag": "5202",
+        "lat": "37.76155"
+      },
+      {
+        "lon": "-122.4833",
+        "title": "Judah St & 25th Ave",
+        "stopId": "15203",
+        "tag": "5203",
+        "lat": "37.7614499"
+      },
+      {
+        "lon": "-122.48651",
+        "title": "Judah St & 28th Ave",
+        "stopId": "15205",
+        "tag": "5205",
+        "lat": "37.7613099"
+      },
+      {
+        "lon": "-122.48972",
+        "title": "Judah St & 31st Ave",
+        "stopId": "15207",
+        "tag": "5207",
+        "lat": "37.7611699"
+      },
+      {
+        "lon": "-122.49293",
+        "title": "Judah St & 34th Ave",
+        "stopId": "15209",
+        "tag": "5209",
+        "lat": "37.7610299"
+      },
+      {
+        "lon": "-122.49556",
+        "title": "Judah St & Sunset Blvd",
+        "stopId": "15224",
+        "tag": "5224",
+        "lat": "37.7609099"
+      },
+      {
+        "lon": "-122.4993599",
+        "title": "Judah St & 40th Ave",
+        "stopId": "15211",
+        "tag": "5211",
+        "lat": "37.76074"
+      },
+      {
+        "lon": "-122.5025699",
+        "title": "Judah St & 43rd Ave",
+        "stopId": "15213",
+        "tag": "5213",
+        "lat": "37.7606"
+      },
+      {
+        "lon": "-122.50583",
+        "title": "Judah St & 46th Ave",
+        "stopId": "15215",
+        "tag": "5215",
+        "lat": "37.7604899"
+      },
+      {
+        "lon": "-122.5090099",
+        "title": "Judah & La Playa St",
+        "stopId": "15221",
+        "tag": "5221",
+        "lat": "37.7603599"
+      },
+      {
+        "lon": "-122.5092",
+        "title": "Judah St & La Playa St",
+        "stopId": "17219",
+        "tag": "7219",
+        "lat": "37.7603499"
+      },
+      {
+        "lon": "-122.39654",
+        "title": "Embarcadero Station Outbound",
+        "stopId": "17217",
+        "tag": "7217",
+        "lat": "37.7932299"
+      },
+      {
+        "lon": "-122.4021299",
+        "title": "Montgomery Station Outbound",
+        "stopId": "16994",
+        "tag": "6994",
+        "lat": "37.78879"
+      },
+      {
+        "lon": "-122.4078199",
+        "title": "Powell Station Outbound",
+        "stopId": "16995",
+        "tag": "6995",
+        "lat": "37.7843"
+      },
+      {
+        "lon": "-122.41499",
+        "title": "Civic Center Station Outbound",
+        "stopId": "16997",
+        "tag": "6997",
+        "lat": "37.7786799"
+      },
+      {
+        "lon": "-122.41934",
+        "title": "Van Ness Station OB",
+        "stopId": "16996",
+        "tag": "6996",
+        "lat": "37.7752299"
+      },
+      {
+        "lon": "-122.39436",
+        "title": "King St & 4th St",
+        "stopId": "15240",
+        "tag": "5240",
+        "lat": "37.7760599"
+      },
+      {
+        "lon": "-122.38982",
+        "title": "King St & 2nd St",
+        "stopId": "15237",
+        "tag": "5237",
+        "lat": "37.7796199"
+      },
+      {
+        "lon": "-122.38798",
+        "title": "The Embarcadero & Brannan St",
+        "stopId": "17145",
+        "tag": "7145",
+        "lat": "37.7846299"
+      },
+      {
+        "lon": "-122.3898399",
+        "title": "Embarcadero Folsom St",
+        "stopId": "14510",
+        "tag": "4510",
+        "lat": "37.7907499"
+      },
+      {
+        "lon": "-122.50878",
+        "title": "Judah St & La Playa St",
+        "stopId": "15223",
+        "tag": "5223",
+        "lat": "37.7601699"
+      },
+      {
+        "lon": "-122.5060599",
+        "title": "Judah St & 46th Ave",
+        "stopId": "15216",
+        "tag": "5216",
+        "lat": "37.76039"
+      },
+      {
+        "lon": "-122.5028399",
+        "title": "Judah St & 43rd Ave",
+        "stopId": "15214",
+        "tag": "5214",
+        "lat": "37.76052"
+      },
+      {
+        "lon": "-122.49915",
+        "title": "Judah St & 40th Ave",
+        "stopId": "15212",
+        "tag": "5212",
+        "lat": "37.7606799"
+      },
+      {
+        "lon": "-122.49596",
+        "title": "Judah St & Sunset Blvd",
+        "stopId": "15225",
+        "tag": "5225",
+        "lat": "37.7608299"
+      },
+      {
+        "lon": "-122.4932",
+        "title": "Judah St & 34th Ave",
+        "stopId": "15210",
+        "tag": "5210",
+        "lat": "37.7609599"
+      },
+      {
+        "lon": "-122.4895",
+        "title": "Judah St & 31st Ave",
+        "stopId": "15208",
+        "tag": "5208",
+        "lat": "37.7611099"
+      },
+      {
+        "lon": "-122.4867599",
+        "title": "Judah St & 28th Ave",
+        "stopId": "15206",
+        "tag": "5206",
+        "lat": "37.76123"
+      },
+      {
+        "lon": "-122.4835599",
+        "title": "Judah St & 25th Ave",
+        "stopId": "15204",
+        "tag": "5204",
+        "lat": "37.76137"
+      },
+      {
+        "lon": "-122.47985",
+        "title": "Judah St & 22nd Ave",
+        "stopId": "15201",
+        "tag": "5201",
+        "lat": "37.7615299"
+      },
+      {
+        "lon": "-122.47719",
+        "title": "Judah St & 19th Ave",
+        "stopId": "15200",
+        "tag": "5200",
+        "lat": "37.7616599"
+      },
+      {
+        "lon": "-122.47278",
+        "title": "Judah St & 15th Ave",
+        "stopId": "15197",
+        "tag": "5197",
+        "lat": "37.7618499"
+      },
+      {
+        "lon": "-122.4705699",
+        "title": "Judah St & Funston Ave",
+        "stopId": "15220",
+        "tag": "5220",
+        "lat": "37.76195"
+      },
+      {
+        "lon": "-122.4695299",
+        "title": "Judah St & 12th Ave",
+        "stopId": "15196",
+        "tag": "5196",
+        "lat": "37.76199"
+      },
+      {
+        "lon": "-122.46631",
+        "title": "Judah St & 9th Ave",
+        "stopId": "15194",
+        "tag": "5194",
+        "lat": "37.7621399"
+      },
+      {
+        "lon": "-122.46624",
+        "title": "9th Ave & Irving St",
+        "stopId": "13212",
+        "tag": "3212",
+        "lat": "37.76391"
+      },
+      {
+        "lon": "-122.46428",
+        "title": "Irving St & 7th Ave",
+        "stopId": "15122",
+        "tag": "5122",
+        "lat": "37.7640899"
+      },
+      {
+        "lon": "-122.4610599",
+        "title": "Irving St & 4th Ave",
+        "stopId": "15120",
+        "tag": "5120",
+        "lat": "37.76423"
+      },
+      {
+        "lon": "-122.45802",
+        "title": "Irving St & Arguello Blvd",
+        "stopId": "15124",
+        "tag": "5124",
+        "lat": "37.7643699"
+      },
+      {
+        "lon": "-122.45651",
+        "title": "Carl St & Hillway Ave",
+        "stopId": "13913",
+        "tag": "3913",
+        "lat": "37.7649299"
+      },
+      {
+        "lon": "-122.45293",
+        "title": "Carl St & Stanyan St",
+        "stopId": "13915",
+        "tag": "3915",
+        "lat": "37.7653699"
+      },
+      {
+        "lon": "-122.45013",
+        "title": "Carl St & Cole St",
+        "stopId": "13911",
+        "tag": "3911",
+        "lat": "37.7657499"
+      },
+      {
+        "lon": "-122.43308",
+        "title": "Sunset Tunnel East Portal",
+        "stopId": "17318",
+        "tag": "7318",
+        "lat": "37.76913"
+      },
+      {
+        "lon": "-122.4294",
+        "title": "Duboce Ave & Church St",
+        "stopId": "14448",
+        "tag": "4448",
+        "lat": "37.7694099"
+      },
+      {
+        "lon": "-122.3964",
+        "title": "Embarcadero Station Inbound",
+        "stopId": "16992",
+        "tag": "6992",
+        "lat": "37.7931399"
+      },
+      {
+        "lon": "-122.38969",
+        "title": "The Embarcadero & Folsom St",
+        "stopId": "14509",
+        "tag": "4509",
+        "lat": "37.79048"
+      },
+      {
+        "lon": "-122.3881399",
+        "title": "The Embarcadero & Brannan St",
+        "stopId": "14506",
+        "tag": "4506",
+        "lat": "37.78436"
+      },
+      {
+        "lon": "-122.3898699",
+        "title": "King St & 2nd St",
+        "stopId": "15234",
+        "tag": "5234",
+        "lat": "37.77972"
+      },
+      {
+        "lon": "-122.39423",
+        "title": "King St & 4th St",
+        "stopId": "15239",
+        "tag": "5239",
+        "lat": "37.7762099"
+      },
+      {
+        "lon": "-122.41919",
+        "title": "Van Ness Station Inbound",
+        "stopId": "15419",
+        "tag": "5419",
+        "lat": "37.7750699"
+      },
+      {
+        "lon": "-122.4148099",
+        "title": "Civic Center Station Inbound",
+        "stopId": "15727",
+        "tag": "5727",
+        "lat": "37.77854"
+      },
+      {
+        "lon": "-122.4076899",
+        "title": "Powell Station Inbound",
+        "stopId": "15417",
+        "tag": "5417",
+        "lat": "37.7842"
+      },
+      {
+        "lon": "-122.4019199",
+        "title": "Montgomery Station Inbound",
+        "stopId": "15731",
+        "tag": "5731",
+        "lat": "37.7887"
+      }
+    ],
+    "title": "N-Judah",
+    "lonMin": "-122.5092",
+    "color": "003399",
+    "direction": [
+      {
+        "stop": [
+          {
+            "tag": "5223"
+          },
+          {
+            "tag": "5216"
+          },
+          {
+            "tag": "5214"
+          },
+          {
+            "tag": "5212"
+          },
+          {
+            "tag": "5225"
+          },
+          {
+            "tag": "5210"
+          },
+          {
+            "tag": "5208"
+          },
+          {
+            "tag": "5206"
+          },
+          {
+            "tag": "5204"
+          },
+          {
+            "tag": "5201"
+          },
+          {
+            "tag": "5200"
+          },
+          {
+            "tag": "5197"
+          },
+          {
+            "tag": "5220"
+          },
+          {
+            "tag": "5196"
+          },
+          {
+            "tag": "5194"
+          },
+          {
+            "tag": "3212"
+          },
+          {
+            "tag": "5122"
+          },
+          {
+            "tag": "5120"
+          },
+          {
+            "tag": "5124"
+          },
+          {
+            "tag": "3913"
+          },
+          {
+            "tag": "3915"
+          },
+          {
+            "tag": "3911"
+          },
+          {
+            "tag": "7318"
+          },
+          {
+            "tag": "4448"
+          },
+          {
+            "tag": "5419"
+          },
+          {
+            "tag": "5727"
+          },
+          {
+            "tag": "5417"
+          },
+          {
+            "tag": "5731"
+          },
+          {
+            "tag": "6992"
+          },
+          {
+            "tag": "4509"
+          },
+          {
+            "tag": "4506"
+          },
+          {
+            "tag": "5234"
+          },
+          {
+            "tag": "5239"
+          }
+        ],
+        "title": "Inbound to Caltrain via Downtown",
+        "useForUI": "true",
+        "tag": "N____I_F00",
+        "name": "Inbound"
+      },
+      {
+        "stop": [
+          {
+            "tag": "5240"
+          },
+          {
+            "tag": "5237"
+          },
+          {
+            "tag": "7145"
+          },
+          {
+            "tag": "4510"
+          },
+          {
+            "tag": "7217"
+          },
+          {
+            "tag": "6994"
+          },
+          {
+            "tag": "6995"
+          },
+          {
+            "tag": "6997"
+          },
+          {
+            "tag": "6996"
+          },
+          {
+            "tag": "4447"
+          },
+          {
+            "tag": "7252"
+          },
+          {
+            "tag": "3909"
+          },
+          {
+            "tag": "3914"
+          },
+          {
+            "tag": "3912"
+          },
+          {
+            "tag": "5118"
+          },
+          {
+            "tag": "5119"
+          },
+          {
+            "tag": "5121"
+          },
+          {
+            "tag": "5123"
+          },
+          {
+            "tag": "5193"
+          },
+          {
+            "tag": "5195"
+          },
+          {
+            "tag": "5219"
+          },
+          {
+            "tag": "5198"
+          },
+          {
+            "tag": "5199"
+          },
+          {
+            "tag": "5202"
+          },
+          {
+            "tag": "5203"
+          },
+          {
+            "tag": "5205"
+          },
+          {
+            "tag": "5207"
+          },
+          {
+            "tag": "5209"
+          },
+          {
+            "tag": "5224"
+          },
+          {
+            "tag": "5211"
+          },
+          {
+            "tag": "5213"
+          },
+          {
+            "tag": "5215"
+          },
+          {
+            "tag": "5221"
+          },
+          {
+            "tag": "7219"
+          }
+        ],
+        "title": "Outbound to Ocean Beach via Downtown",
+        "useForUI": "true",
+        "tag": "N____O_F00",
+        "name": "Outbound"
+      }
+    ],
+    "tag": "N",
+    "lonMax": "-122.38798",
+    "oppositeColor": "ffffff",
+    "latMin": "37.7601699"
+  },
+  "copyright": "All data copyright San Francisco Muni 2016."
+}
