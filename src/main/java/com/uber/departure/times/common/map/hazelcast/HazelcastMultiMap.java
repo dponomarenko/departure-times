@@ -1,6 +1,7 @@
 package com.uber.departure.times.common.map.hazelcast;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,11 @@ public final class HazelcastMultiMap<K, KM, V, VM> implements AsyncMultiMap<K, V
 
     @NotNull
     private Collection<V> get(@NotNull K key, @NotNull MultiMap<KM, VM> map) {
-        return valueSerializer.from(map.get(keySerializer.to(key)));
+        final Collection<VM> value = map.get(keySerializer.to(key));
+        if (value == null) {
+            return Collections.emptyList();
+        }
+        return valueSerializer.from(value);
     }
 
     private boolean add(@NotNull K key, @NotNull V value, @NotNull MultiMap<KM, VM> map) {

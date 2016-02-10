@@ -34,6 +34,10 @@ public abstract class TypedCollection<T extends JsonConvertible> implements Iter
         return values.size();
     }
 
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+
     @Override
     public Iterator<T> iterator() {
         return values.iterator();

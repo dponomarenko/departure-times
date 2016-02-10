@@ -1,6 +1,7 @@
 package com.uber.departure.times.hub.server;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -35,9 +36,11 @@ public final class PredictionsLoaderService {
     public Future<Map<StopId, ProvidedPredictions>> load(@NotNull Set<StopId> stops) {
         final Map<StopId, Future<ProvidedPredictions>> futures = new HashMap<>();
         for (StopId s : stops) {
-            futures.put(s, map.computeIfAbsent(s,
-                    id -> dataProviderClient.predict(s)
-                    , conf.getCacheTTLMs()));
+            futures.put(s, map.computeIfAbsent(s, id -> dataProviderClient.predict(s), conf.getCacheTTLMs()));
+        }
+
+        if(futures.isEmpty()){
+            return Future.succeededFuture(Collections.emptyMap());
         }
 
         //noinspection unchecked

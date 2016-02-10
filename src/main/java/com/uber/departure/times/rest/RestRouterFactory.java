@@ -85,7 +85,7 @@ public final class RestRouterFactory {
                 .setStatusCode(400)
                 .end(json.encode());
 
-        logger.error("API_ERROR " + issue + " request: " + request.uri());
+        logger.error("API_ERROR " + issue + " request: " + request.uri() + " error:" + error);
     }
 
     @NotNull

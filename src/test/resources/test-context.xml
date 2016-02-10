@@ -10,6 +10,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.uber.departure.times.crawler.common"/>
     <context:component-scan base-package="com.uber.departure.times.hub.server"/>
+    <context:component-scan base-package="com.uber.departure.times.clients.nextbus.parser"/>
     <context:component-scan base-package="com.uber.departure.times.rest"/>
     <context:component-scan base-package="com.uber.departure.times.mock"/>
 </beans>

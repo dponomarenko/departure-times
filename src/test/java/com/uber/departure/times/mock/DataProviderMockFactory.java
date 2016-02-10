@@ -45,8 +45,10 @@ public final class DataProviderMockFactory {
 
     public static final Route AC_TRANSIT_39_ROUTE = new Route("actransit", "39");
 
+    public static final Stop AC_TRANSIT_39_5194_STOP = new Stop(new StopId("actransit", "39", "5194"), new Location(37.7621399, -122.46631));
+
     public static final Set<Stop> AC_TRANSIT_39_ROUTE_STOPS = new HashSet<>(Arrays.asList(
-            new Stop(new StopId("actransit", "39", "5194"), new Location(37.7621399, -122.46631)),
+            AC_TRANSIT_39_5194_STOP,
             new Stop(new StopId("actransit", "39", "5198"), new Location(37.76191, -122.4737799)),
             new Stop(new StopId("actransit", "39", "7318"), new Location(37.76913, -122.43308)),
             new Stop(new StopId("actransit", "39", "5731"), new Location(37.7887, -122.4019199)),
@@ -115,7 +117,7 @@ public final class DataProviderMockFactory {
             new Stop(new StopId("actransit", "39", "5123"), new Location(37.7641099, -122.46616))
     ));
 
-    public static final StopId AC_TRANSIT_39_5194_STOP_ID = new StopId("actransit", "39", "5194");
+    public static final StopId AC_TRANSIT_39_5194_STOP_ID = AC_TRANSIT_39_5194_STOP.getStopId();
 
     public static final ProvidedPredictions AC_TRANSIT_39_5194_STOP_ID_PREDICTIONS = new ProvidedPredictions(
             "SF Muni",

@@ -9,11 +9,9 @@ import org.jetbrains.annotations.NotNull;
  * @author Danila Ponomarenko
  */
 public interface Serializer<V, S> {
-    @NotNull
-    S to(@NotNull V value);
+    S to(V value);
 
-    @NotNull
-    V from(@NotNull S value);
+    V from(S value);
 
     @NotNull
     default Collection<S> to(@NotNull Collection<V> value) {

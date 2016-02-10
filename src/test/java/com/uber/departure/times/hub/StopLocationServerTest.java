@@ -22,7 +22,7 @@ import static org.hamcrest.CoreMatchers.is;
 /**
  * @author Danila Ponomarenko
  */
-public final class StopLocationsServerTest extends AVertxTestClass {
+public final class StopLocationServerTest extends AVertxTestClass {
     @Autowired
     private StopLocationClient storage;
 

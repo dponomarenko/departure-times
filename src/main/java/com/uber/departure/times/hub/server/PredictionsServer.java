@@ -70,7 +70,8 @@ public final class PredictionsServer extends PredictionsClient {
     }
 
     @NotNull
-    private Future<Predictions> setDistances(@NotNull Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance, @NotNull Future<Map<StopId, ProvidedPredictions>> f) {
+    private Future<Predictions> setDistances(@NotNull Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance,
+                                             @NotNull Future<Map<StopId, ProvidedPredictions>> f) {
         final Future<Predictions> result = Future.future();
         f.compose(m -> {
             final List<Prediction> list = new ArrayList<>();
@@ -96,7 +97,7 @@ public final class PredictionsServer extends PredictionsClient {
         final int size = epoch.length;
         final int[] result = new int[size];
         for (int i = 0; i < size; i++) {
-            result[i] = (int) (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - epoch[i]);
+            result[i] = (int) TimeUnit.SECONDS.toMinutes(epoch[i] - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
         }
         return result;
     }
