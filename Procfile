@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.uber.departure.times.HerokuRunner -DLOG_PATH=/var/log/
