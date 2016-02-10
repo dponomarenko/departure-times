@@ -6,7 +6,7 @@
 
     <artifactId>departure-times</artifactId>
     <groupId>com.uber.departure.times</groupId>
-    <version>${departure-times.version}</version>
+    <version>${departure.times.version}</version>
 
     <dependencies>
         <dependency>
@@ -105,7 +105,7 @@
     </dependencies>
 
     <properties>
-        <departure-times.version>1.0-SNAPSHOT</departure-times.version>
+        <departure.times.version>1.0-SNAPSHOT</departure.times.version>
         <!--Compiler version-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
