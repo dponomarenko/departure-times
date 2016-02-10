@@ -3,6 +3,7 @@ package com.uber.departure.times.common.map;
 import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import io.vertx.core.Future;
 
@@ -14,7 +15,7 @@ public interface AsyncMap<K, V> {
     Future<V> get(@NotNull K key);
 
     @NotNull
-    Future<V> put(@NotNull K key, @NotNull V value, long ttlMs);
+    Future<V> put(@NotNull K key, @Nullable V value, long ttlMs);
 
     @NotNull
     Future<V> computeIfAbsent(@NotNull K key, @NotNull Function<K, Future<V>> f, long ttlMs);

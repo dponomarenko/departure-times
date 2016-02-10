@@ -1,4 +1,4 @@
-package com.uber.departure.times.crawler;
+package com.uber.departure.times.crawler.common;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

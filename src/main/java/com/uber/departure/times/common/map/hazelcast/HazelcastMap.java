@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.hazelcast.core.IMap;
 import com.uber.departure.times.common.map.AsyncMap;
@@ -45,7 +46,7 @@ public final class HazelcastMap<K, KM, V, VM> implements AsyncMap<K, V> {
 
     @NotNull
     @Override
-    public Future<V> put(@NotNull K key, @NotNull V value, long ttlMs) {
+    public Future<V> put(@NotNull K key, @Nullable V value, long ttlMs) {
         Objects.requireNonNull(key, "key");
         final Future<V> result = Future.future();
         vertx.executeBlocking(event -> result.complete(put(key, value, map, ttlMs)), result.completer());
@@ -70,7 +71,7 @@ public final class HazelcastMap<K, KM, V, VM> implements AsyncMap<K, V> {
         return valueSerializer.from(vm);
     }
 
-    private V put(@NotNull K key, @NotNull V value, @NotNull IMap<KM, VM> map, long ttlMs) {
+    private V put(@NotNull K key, @Nullable V value, @NotNull IMap<KM, VM> map, long ttlMs) {
         return valueSerializer.from(map.put(keySerializer.to(key), valueSerializer.to(value), ttlMs, TimeUnit.MILLISECONDS));
     }
 

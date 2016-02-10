@@ -32,11 +32,11 @@ public final class PredictionsParser {
         final JsonObject direction = predictions.getJsonObject("direction");
         final String directionTitle = direction.getString("title");
 
-        final JsonArray prediction = predictions.getJsonArray("prediction");
+        final JsonArray prediction = direction.getJsonArray("prediction");
         final long[] times = new long[prediction.size()];
         for (int i = 0; i < times.length; i++) {
             final JsonObject jObject = prediction.getJsonObject(i);
-            times[i] = jObject.getLong("epochTime");
+            times[i] = Long.valueOf(jObject.getString("epochTime"));
         }
         return new ProvidedPredictions(agencyTitle, routeTitle, stopTitle, directionTitle, times);
     }

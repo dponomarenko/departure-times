@@ -1,7 +1,7 @@
 package com.uber.departure.times.hub.server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,15 +32,7 @@ public final class PredictionsLoaderService {
     private HubConfiguration conf;
 
     @NotNull
-    public Future<Map<StopId, ProvidedPredictions>> load(@NotNull Future<Set<StopId>> stops) {
-        final Future<Map<StopId, ProvidedPredictions>> result = Future.future();
-
-        stops.compose(s -> loadPredictions(s).compose(result::complete, result), result);
-        return result;
-    }
-
-    @NotNull
-    private Future<Map<StopId, ProvidedPredictions>> loadPredictions(@NotNull Set<StopId> stops) {
+    public Future<Map<StopId, ProvidedPredictions>> load(@NotNull Set<StopId> stops) {
         final Map<StopId, Future<ProvidedPredictions>> futures = new HashMap<>();
         for (StopId s : stops) {
             futures.put(s, map.computeIfAbsent(s,
@@ -49,7 +41,7 @@ public final class PredictionsLoaderService {
         }
 
         //noinspection unchecked
-        final CompositeFuture all = CompositeFuture.all((List) futures);
+        final CompositeFuture all = CompositeFuture.all(new ArrayList(futures.values()));
         final Future<Map<StopId, ProvidedPredictions>> result = Future.future();
         all.compose(r -> {
             final Map<StopId, ProvidedPredictions> predictions = new HashMap<>();

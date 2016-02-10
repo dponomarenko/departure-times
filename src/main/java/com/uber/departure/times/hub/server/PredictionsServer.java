@@ -43,7 +43,7 @@ public final class PredictionsServer extends PredictionsClient {
 
     private void getDepartures(@NotNull Message<Location> message) {
         final Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance = nearbyStopsService.detect(message.body());
-        final Future<Map<StopId, ProvidedPredictions>> predictions = loaderService.load(getIds(stop2Distance));
+        final Future<Map<StopId, ProvidedPredictions>> predictions = load(getIds(stop2Distance));
         final Future<Predictions> result = setDistances(stop2Distance, predictions);
         result.setHandler(r -> {
             if (r.succeeded()) {
@@ -52,6 +52,14 @@ public final class PredictionsServer extends PredictionsClient {
                 message.fail(1, "failed to get departures");
             }
         });
+    }
+
+
+    @NotNull
+    public Future<Map<StopId, ProvidedPredictions>> load(@NotNull Future<Set<StopId>> stops) {
+        final Future<Map<StopId, ProvidedPredictions>> result = Future.future();
+        stops.compose(s -> loaderService.load(s).compose(result::complete, result), result);
+        return result;
     }
 
     @NotNull

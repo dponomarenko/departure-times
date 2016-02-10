@@ -23,13 +23,11 @@ public final class VertxProvider {
     public VertxProvider() throws InterruptedException {
         final Future<Vertx> future = Future.future();
         Vertx.clusteredVertx(
-                new VertxOptions(),
+                new VertxOptions().setClustered(true).setWorkerPoolSize(8),
                 future.completer()
         );
-        while (!future.isComplete()){
-            Thread.sleep(100);
-        }
-        vertx = future.result();
+
+        vertx = FutureHelper.wait(future);
     }
 
     @Bean(name = SpringVerticle.VERTX_BEAN)

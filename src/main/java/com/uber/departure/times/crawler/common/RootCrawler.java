@@ -1,4 +1,4 @@
-package com.uber.departure.times.crawler;
+package com.uber.departure.times.crawler.common;
 
 import java.util.Collection;
 import java.util.function.Consumer;

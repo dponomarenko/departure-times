@@ -78,6 +78,11 @@ public final class Location extends JsonBased {
         return (int) (distanceInRadians(l1, l2) * EARTH_MEAN_RADIUS_METERS);
     }
 
+    /*
+     * All following methods copied and modified from com.javadocmd.simplelatlng.LatLngTool
+     * Copyright 2010 Tyler Coles Licensed under the Apache License, Version 2.0 (the "License")
+     */
+
     public static final int EARTH_MEAN_RADIUS_METERS = 6371009;
 
     private static double distanceInRadians(Location point1, Location point2) {
@@ -88,5 +93,19 @@ public final class Location extends JsonBased {
         final double a = Math.sin(dLatR / 2) * Math.sin(dLatR / 2) + Math.cos(lat1R) * Math.cos(lat2R)
                 * Math.sin(dLngR / 2) * Math.sin(dLngR / 2);
         return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    @NotNull
+    public Location go(int meters, double bearing) {
+        final double bR = Math.toRadians(bearing);
+        final double lat1R = Math.toRadians(getLatitude());
+        final double lon1R = Math.toRadians(getLongitude());
+        final double dR = meters / EARTH_MEAN_RADIUS_METERS;
+
+        final double a = Math.sin(dR) * Math.cos(lat1R);
+        final double lat2 = Math.asin(Math.sin(lat1R) * Math.cos(dR) + a * Math.cos(bR));
+        final double lon2 = lon1R
+                + Math.atan2(Math.sin(bR) * a, Math.cos(dR) - Math.sin(lat1R) * Math.sin(lat2));
+        return new Location(Math.toDegrees(lat2), Math.toDegrees(lon2));
     }
 }

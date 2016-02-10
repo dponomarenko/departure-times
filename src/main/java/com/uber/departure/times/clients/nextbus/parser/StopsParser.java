@@ -37,8 +37,8 @@ public final class StopsParser {
                         route.getRouteTag(),
                         jStop.getString("tag")),
                 new Location(
-                        jStop.getDouble("lat"),
-                        jStop.getDouble("lon")
+                        Double.valueOf(jStop.getString("lat")),
+                        Double.valueOf(jStop.getString("lon"))
                 )
         );
     }
