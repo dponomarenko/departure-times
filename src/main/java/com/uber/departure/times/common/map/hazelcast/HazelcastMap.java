@@ -81,6 +81,7 @@ public final class HazelcastMap<K, KM, V, VM> implements AsyncMap<K, V> {
         final Future<V> result = Future.future();
         final V value = get(key, map);
         if (value != null) {
+            map.unlock(mKey);
             result.complete(value);
         } else {
             f.apply(key).compose(v -> {

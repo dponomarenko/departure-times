@@ -36,14 +36,19 @@ public abstract class SpringVerticle extends StartupLoggingVerticle {
         connector.startFuture().compose(e -> startFuture.complete(), startFuture);
     }
 
+    public static final String VERTX_BEAN = "vertx";
+    public static final String VERTX_CONTEXT_BEAN = "vertx-context";
+    public static final String EVENT_BUS_BEAN = "event-bus";
+    public static final String CONNECTOR_BEAN = "connector";
+
     @NotNull
     private AbstractApplicationContext createVertxContext(@NotNull SpringVerticleConnector connector) {
         final StaticApplicationContext context = new StaticApplicationContext();
         context.refresh();
-        context.getBeanFactory().registerSingleton("vertx", vertx);
-        context.getBeanFactory().registerSingleton("vertx-context", context);
-        context.getBeanFactory().registerSingleton("event-bus", vertx.eventBus());
-        context.getBeanFactory().registerSingleton("connector", connector);
+        context.getBeanFactory().registerSingleton(VERTX_BEAN, vertx);
+        context.getBeanFactory().registerSingleton(VERTX_CONTEXT_BEAN, context);
+        context.getBeanFactory().registerSingleton(EVENT_BUS_BEAN, vertx.eventBus());
+        context.getBeanFactory().registerSingleton(CONNECTOR_BEAN, connector);
         return context;
     }
 

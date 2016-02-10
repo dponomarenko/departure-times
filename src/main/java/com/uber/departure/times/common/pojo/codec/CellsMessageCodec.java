@@ -29,7 +29,7 @@ public final class CellsMessageCodec implements MessageCodec<Cells, Cells> {
 
     @Override
     public String name() {
-        return "stops";
+        return "cells";
     }
 
     @Override

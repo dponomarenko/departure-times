@@ -63,7 +63,7 @@ public final class Cell extends JsonBased {
     }
 
     private static boolean validateX(int x) {
-        return -MAX_X >= x && x < MAX_X;
+        return -MAX_X <= x && x < MAX_X;
     }
 
     private static boolean validateY(int y) {
