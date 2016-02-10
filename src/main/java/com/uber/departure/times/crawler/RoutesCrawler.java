@@ -1,38 +1,42 @@
 package com.uber.departure.times.crawler;
 
-import java.util.Objects;
-import java.util.function.Consumer;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.uber.departure.times.clients.ProviderClient;
-import com.uber.departure.times.common.VerticleBean;
-import com.uber.departure.times.hub.service.location.StopLocationClient;
-import com.uber.departure.times.pojo.Route;
-import com.uber.departure.times.pojo.Stop;
-import com.uber.departure.times.pojo.Stops;
+import com.uber.departure.times.clients.DataProviderClient;
+import com.uber.departure.times.common.Publisher;
+import com.uber.departure.times.common.pojo.Route;
+import com.uber.departure.times.common.pojo.Stop;
+import com.uber.departure.times.common.pojo.Stops;
+import com.uber.departure.times.hub.client.StopLocationClient;
 
-import io.vertx.core.Vertx;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 /**
  * @author Danila Ponomarenko
  */
-public final class RoutesCrawler extends VerticleBean<CrawlerConfiguration> implements Consumer<Route> {
+@Component
+public final class RoutesCrawler {
     private static final Logger logger = LoggerFactory.getLogger(RootCrawler.class);
 
-    private final ProviderClient client;
-    private final StopLocationClient stopLocationClient;
+    @Resource(name = AgenciesCrawler.BEAN_NAME)
+    private Publisher<Route> routes;
+    @Autowired
+    private DataProviderClient client;
+    @Autowired
+    private StopLocationClient storage;
 
-    public RoutesCrawler(@NotNull ProviderClient client, @NotNull StopLocationClient stopLocationClient, @NotNull Vertx vertx, @NotNull CrawlerConfiguration conf) {
-        super(vertx, conf);
-        this.stopLocationClient = Objects.requireNonNull(stopLocationClient, "stopLocationClient");
-        this.client = Objects.requireNonNull(client, "client");
+    @PostConstruct
+    private void init() {
+        routes.subscribe(this::accept);
     }
 
-    @Override
-    public void accept(@NotNull Route route) {
+    private void accept(@NotNull Route route) {
         client.getStops(route).setHandler(r -> {
             if (r.succeeded()) {
                 process(route, r.result());
@@ -43,7 +47,7 @@ public final class RoutesCrawler extends VerticleBean<CrawlerConfiguration> impl
     private void process(@NotNull Route route, @NotNull Stops stops) {
         logger.error(stops.size() + " stops loaded for agency:" + route.getAgencyTag() + " route:" + route.getRouteTag());
         for (Stop stop : stops) {
-            stopLocationClient.add(stop);
+            storage.add(stop);
         }
     }
 }

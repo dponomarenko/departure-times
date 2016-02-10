@@ -67,7 +67,11 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -83,6 +87,7 @@
         <jul2slf4j.version>1.7.14</jul2slf4j.version>
 
         <vertx.version>3.2.1</vertx.version>
+        <springframework.version>4.2.4.RELEASE</springframework.version>
 
         <guava.version>18.0</guava.version>
         <commons-lang3.version>3.4</commons-lang3.version>

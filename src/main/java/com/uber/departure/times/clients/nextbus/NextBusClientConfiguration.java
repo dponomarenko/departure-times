@@ -1,21 +1,21 @@
 package com.uber.departure.times.clients.nextbus;
 
 import org.jetbrains.annotations.NotNull;
-
-import com.uber.departure.times.common.VerticleConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import io.vertx.core.Context;
 
 /**
  * @author Danila Ponomarenko
  */
-public final class NextBusClientConfiguration extends VerticleConfiguration {
-    public NextBusClientConfiguration(@NotNull Context context) {
-        super(context);
-    }
+@Component
+public final class NextBusClientConfiguration {
+    @Autowired
+    private Context context;
 
     @NotNull
     public String getNextBusFeedURI() {
-        return config().getString("client.nextbus.host", "http://webservices.nextbus.com/service/publicJSONFeed");
+        return context.config().getString("client.nextbus.host", "http://webservices.nextbus.com/service/publicJSONFeed");
     }
 }

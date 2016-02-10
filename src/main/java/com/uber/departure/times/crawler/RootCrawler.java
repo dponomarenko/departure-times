@@ -1,30 +1,32 @@
 package com.uber.departure.times.crawler;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.uber.departure.times.clients.ProviderClient;
-import com.uber.departure.times.common.VerticleBean;
+import com.uber.departure.times.clients.DataProviderClient;
+import com.uber.departure.times.common.Publisher;
 
-import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 /**
  * @author Danila Ponomarenko
  */
-public final class RootCrawler extends VerticleBean<CrawlerConfiguration> {
+@Component(RootCrawler.BEAN_NAME)
+public final class RootCrawler implements Publisher<String> {
     private static final Logger logger = LoggerFactory.getLogger(RootCrawler.class);
 
-    private final ProviderClient client;
+    public static final String BEAN_NAME = "rootCrawler";
 
-    public RootCrawler(@NotNull ProviderClient client, @NotNull Vertx vertx, @NotNull CrawlerConfiguration conf) {
-        super(vertx, conf);
-        this.client = Objects.requireNonNull(client, "client");
-    }
+    @Autowired
+    private DataProviderClient client;
+    @Autowired
+    private EventBus eventBus;
 
     public void crawl() {
         client.getAgencyTags().setHandler(r -> {
@@ -36,8 +38,9 @@ public final class RootCrawler extends VerticleBean<CrawlerConfiguration> {
 
     private static final String AGENCIES_ADDRESS = "crawler.agencies";
 
+    @Override
     public void subscribe(@NotNull Consumer<String> agencyConsumer) {
-        vertx.eventBus().consumer(RootCrawler.AGENCIES_ADDRESS, r -> {
+        eventBus.consumer(RootCrawler.AGENCIES_ADDRESS, r -> {
             agencyConsumer.accept((String) r.body());
         });
     }
@@ -45,7 +48,7 @@ public final class RootCrawler extends VerticleBean<CrawlerConfiguration> {
     private void process(@NotNull Collection<String> tags) {
         logger.error(tags.size() + " agencies loaded");
         for (String tag : tags) {
-            vertx.eventBus().send(AGENCIES_ADDRESS, tag);
+            eventBus.send(AGENCIES_ADDRESS, tag);
         }
     }
 }
