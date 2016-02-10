@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 import com.uber.departure.times.clients.DataProviderClient;
 import com.uber.departure.times.common.Publisher;
 import com.uber.departure.times.common.pojo.Route;
+import com.uber.departure.times.common.pojo.codec.RouteMessageCodec;
 
-import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
@@ -32,10 +33,11 @@ public final class AgenciesCrawler implements Publisher<Route> {
     @Resource(name = RootCrawler.BEAN_NAME)
     private Publisher<String> agencies;
     @Autowired
-    private Vertx vertx;
+    private EventBus eventBus;
 
     @PostConstruct
     private void init() {
+        eventBus.registerDefaultCodec(Route.class, new RouteMessageCodec());
         agencies.subscribe(this::accept);
     }
 
@@ -50,7 +52,7 @@ public final class AgenciesCrawler implements Publisher<Route> {
     private void process(@NotNull String agencyTag, @NotNull Collection<String> tags) {
         logger.error(tags.size() + " routes loaded for " + agencyTag);
         for (String routeTag : tags) {
-            vertx.eventBus().send(ROUTES_ADDRESS, new Route(agencyTag, routeTag));
+            eventBus.send(ROUTES_ADDRESS, new Route(agencyTag, routeTag));
         }
     }
 
@@ -58,7 +60,7 @@ public final class AgenciesCrawler implements Publisher<Route> {
 
     @Override
     public void subscribe(@NotNull Consumer<Route> routeConsumer) {
-        vertx.eventBus().consumer(ROUTES_ADDRESS, r -> {
+        eventBus.consumer(ROUTES_ADDRESS, r -> {
             routeConsumer.accept((Route) r.body());
         });
     }

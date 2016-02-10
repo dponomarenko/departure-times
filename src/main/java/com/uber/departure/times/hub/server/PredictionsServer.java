@@ -1,25 +1,26 @@
 package com.uber.departure.times.hub.server;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uber.departure.times.clients.DataProviderClient;
 import com.uber.departure.times.common.pojo.Location;
+import com.uber.departure.times.common.pojo.Prediction;
+import com.uber.departure.times.common.pojo.Predictions;
+import com.uber.departure.times.common.pojo.ProvidedPredictions;
 import com.uber.departure.times.common.pojo.Stop;
-import com.uber.departure.times.common.pojo.StopPredictions;
-import com.uber.departure.times.common.pojo.Stops;
-import com.uber.departure.times.common.pojo.StopsPredictions;
+import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.hub.client.PredictionsClient;
 
-import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 
@@ -29,9 +30,9 @@ import io.vertx.core.eventbus.Message;
 @Component
 public final class PredictionsServer extends PredictionsClient {
     @Autowired
-    private DataProviderClient dataProviderClient;
-    @Autowired
     private NearbyStopsService nearbyStopsService;
+    @Autowired
+    private PredictionsLoaderService loaderService;
 
 
     @PostConstruct
@@ -41,9 +42,9 @@ public final class PredictionsServer extends PredictionsClient {
     }
 
     private void getDepartures(@NotNull Message<Location> message) {
-        final Future<Map<Stop, Integer>> stop2Distance = nearbyStopsService.detect(message.body());
-        final Future<Map<Stop, StopPredictions>> predictions = getPredictions(toStops(stop2Distance));
-        final Future<StopsPredictions> result = setDistances(stop2Distance, predictions);
+        final Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance = nearbyStopsService.detect(message.body());
+        final Future<Map<StopId, ProvidedPredictions>> predictions = loaderService.load(getIds(stop2Distance));
+        final Future<Predictions> result = setDistances(stop2Distance, predictions);
         result.setHandler(r -> {
             if (r.succeeded()) {
                 message.reply(r.result());
@@ -54,52 +55,41 @@ public final class PredictionsServer extends PredictionsClient {
     }
 
     @NotNull
-    private Future<Stops> toStops(@NotNull Future<Map<Stop, Integer>> stops) {
-        final Future<Stops> result = Future.future();
-        stops.compose(m -> result.complete(new Stops(m.keySet())), result);
+    private Future<Set<StopId>> getIds(@NotNull Future<Map<StopId, Pair<Stop, Integer>>> stops) {
+        final Future<Set<StopId>> result = Future.future();
+        stops.compose(m -> result.complete(m.keySet()), result);
         return result;
     }
 
     @NotNull
-    private Future<StopsPredictions> setDistances(@NotNull Future<Map<Stop, Integer>> stop2Distance, @NotNull Future<Map<Stop, StopPredictions>> f) {
-        final Future<StopsPredictions> result = Future.future();
+    private Future<Predictions> setDistances(@NotNull Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance, @NotNull Future<Map<StopId, ProvidedPredictions>> f) {
+        final Future<Predictions> result = Future.future();
         f.compose(m -> {
-            final List<StopPredictions> list = new ArrayList<>();
-            for (Map.Entry<Stop, StopPredictions> e : m.entrySet()) {
-                final Stop key = e.getKey();
-                final StopPredictions value = e.getValue();
-                value.setDistance(stop2Distance.result().get(key));
-                list.add(value);
+            final List<Prediction> list = new ArrayList<>();
+            for (Map.Entry<StopId, ProvidedPredictions> e : m.entrySet()) {
+                final StopId key = e.getKey();
+                final ProvidedPredictions value = e.getValue();
+                list.add(new Prediction(
+                        value.getAgency(),
+                        value.getRoute(),
+                        value.getStop(),
+                        value.getDirection(),
+                        stop2Distance.result().get(key).getValue(),
+                        predict(value.getEpoch())
+                ));
             }
-            result.complete(new StopsPredictions(list));
+            result.complete(new Predictions(list));
         }, result);
         return result;
     }
 
     @NotNull
-    private Future<Map<Stop, StopPredictions>> getPredictions(@NotNull Future<Stops> stops) {
-        final Future<Map<Stop, StopPredictions>> result = Future.future();
-        stops.compose(s -> loadPredictions(s).compose(result::complete, result), result);
-        return result;
-    }
-
-    @NotNull
-    private Future<Map<Stop, StopPredictions>> loadPredictions(@NotNull Stops stops) {
-        final Map<Stop, Future<StopPredictions>> futures = new HashMap<>();
-        for (Stop s : stops) {
-            futures.put(s, dataProviderClient.predict(s.getAgencyId(), s.getRouteId(), s.getStopId()));
+    private int[] predict(@NotNull long[] epoch) {
+        final int size = epoch.length;
+        final int[] result = new int[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = (int) (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - epoch[i]);
         }
-
-        //noinspection unchecked
-        final CompositeFuture all = CompositeFuture.all((List) futures);
-        final Future<Map<Stop, StopPredictions>> result = Future.future();
-        all.compose(r -> {
-            final Map<Stop, StopPredictions> predictions = new HashMap<>();
-            for (Map.Entry<Stop, Future<StopPredictions>> f : futures.entrySet()) {
-                predictions.put(f.getKey(), f.getValue().result());
-            }
-            result.complete(predictions);
-        }, result);
         return result;
     }
 }

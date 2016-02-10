@@ -16,4 +16,12 @@ public final class HubConfiguration {
     public int getSearchRadius() {
         return Math.min(context.config().getInteger("hub.search.radius.meters", 300), 500);
     }
+
+    public long getCacheTTLMs() {
+        return context.config().getInteger("hub.predictions.cache.ttl.ms", 60000);
+    }
+
+    public long getCacheLockTimeoutMs() {
+        return context.config().getInteger("hub.predictions.cache.lock.ms", 100);
+    }
 }

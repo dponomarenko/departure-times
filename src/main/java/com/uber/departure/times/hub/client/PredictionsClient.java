@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uber.departure.times.common.pojo.Location;
-import com.uber.departure.times.common.pojo.StopsPredictions;
+import com.uber.departure.times.common.pojo.Predictions;
 import com.uber.departure.times.common.pojo.codec.LocationMessageCodec;
-import com.uber.departure.times.common.pojo.codec.StopPredictionsMessageCodec;
-import com.uber.departure.times.common.pojo.codec.StopsPredictionsMessageCodec;
+import com.uber.departure.times.common.pojo.codec.PredictionsMessageCodec;
 
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
@@ -27,17 +26,16 @@ public class PredictionsClient {
 
     @PostConstruct
     protected void init() {
-        eventBus.registerCodec(new StopsPredictionsMessageCodec());
-        eventBus.registerCodec(new StopPredictionsMessageCodec());
-        eventBus.registerCodec(new LocationMessageCodec());
+        eventBus.registerDefaultCodec(Predictions.class, new PredictionsMessageCodec());
+        eventBus.registerDefaultCodec(Location.class, new LocationMessageCodec());
     }
 
     @NotNull
-    public Future<StopsPredictions> get(@NotNull Location location) {
-        final Future<StopsPredictions> result = Future.future();
+    public Future<Predictions> get(@NotNull Location location) {
+        final Future<Predictions> result = Future.future();
         eventBus.send(GET_DEPARTURES_ADDRESS, location, r -> {
             if (r.succeeded()) {
-                result.complete((StopsPredictions) r.result().body());
+                result.complete((Predictions) r.result().body());
             } else {
                 result.fail(r.cause());
             }

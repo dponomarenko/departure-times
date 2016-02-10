@@ -5,7 +5,8 @@ import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 
 import com.uber.departure.times.common.pojo.Route;
-import com.uber.departure.times.common.pojo.StopPredictions;
+import com.uber.departure.times.common.pojo.ProvidedPredictions;
+import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.common.pojo.Stops;
 
 import io.vertx.core.Future;
@@ -25,5 +26,5 @@ public interface DataProviderClient {
     Future<Stops> getStops(@NotNull Route route);
 
     @NotNull
-    Future<StopPredictions> predict(@NotNull String agencyTag, @NotNull String routeTag, @NotNull String stopTag);
+    Future<ProvidedPredictions> predict(@NotNull StopId stopId);
 }

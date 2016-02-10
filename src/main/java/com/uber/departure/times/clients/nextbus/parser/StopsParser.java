@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.uber.departure.times.common.pojo.Location;
 import com.uber.departure.times.common.pojo.Route;
 import com.uber.departure.times.common.pojo.Stop;
+import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.common.pojo.Stops;
 
 import io.vertx.core.buffer.Buffer;
@@ -32,9 +33,9 @@ public final class StopsParser {
     private Stop parse(@NotNull Route route, @NotNull Object o) {
         final JsonObject jStop = (JsonObject) o;
         return new Stop(
-                route.getAgencyTag(),
-                route.getRouteTag(),
-                jStop.getString("tag"),
+                new StopId(route.getAgencyTag(),
+                        route.getRouteTag(),
+                        jStop.getString("tag")),
                 new Location(
                         jStop.getDouble("lat"),
                         jStop.getDouble("lon")

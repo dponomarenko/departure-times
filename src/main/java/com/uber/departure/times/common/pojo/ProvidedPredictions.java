@@ -13,33 +13,33 @@ import io.vertx.core.json.JsonObject;
 /**
  * @author Danila Ponomarenko
  */
-public final class StopPredictions extends JsonBased {
-    public StopPredictions(@NotNull JsonObject json) {
+public final class ProvidedPredictions extends JsonBased {
+    public ProvidedPredictions(@NotNull JsonObject json) {
         super(json);
         if (!validate(json)) {
             throw new IllegalArgumentException("wrong json");
         }
     }
 
-    public StopPredictions(@NotNull String agency,
-                           @NotNull String route,
-                           @NotNull String stop,
-                           @NotNull String direction,
-                           @NotNull int[] predictions) {
+    public ProvidedPredictions(@NotNull String agency,
+                               @NotNull String route,
+                               @NotNull String stop,
+                               @NotNull String direction,
+                               @NotNull long[] epoch) {
         super();
         json.put(AGENCY, agency);
         json.put(ROUTE, route);
         json.put(STOP, stop);
         json.put(DIRECTION, direction);
-        json.put(PREDICTIONS, toJsonArray(predictions));
+        json.put(EPOCH, toJsonArray(epoch));
         if (!validate(json)) {
             throw new IllegalArgumentException("wrong json");
         }
     }
 
-    private static JsonArray toJsonArray(@NotNull int[] value) {
+    private static JsonArray toJsonArray(@NotNull long[] value) {
         final JsonArray array = new JsonArray();
-        for (int p : value) {
+        for (long p : value) {
             array.add(p);
         }
         return array;
@@ -51,7 +51,7 @@ public final class StopPredictions extends JsonBased {
                 && validateNotNullNotEmpty(getRoute(json))
                 && validateNotNullNotEmpty(getStop(json))
                 && validateNotNullNotEmpty(getDirection(json))
-                && validateNotNullNotEmpty(getPredictions(json));
+                && validateNotNullNotEmpty(getEpoch(json));
     }
 
     public static final String AGENCY = "agc";
@@ -82,24 +82,11 @@ public final class StopPredictions extends JsonBased {
         return json.getString(DIRECTION);
     }
 
-    public static final String PREDICTIONS = "prdctns";
+    public static final String EPOCH = "epoch";
 
     @Nullable
-    public static int[] getPredictions(@NotNull JsonObject json) {
-        final JsonArray jsonArray = json.getJsonArray(PREDICTIONS);
-        final int size = jsonArray.size();
-        final int[] result = new int[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = jsonArray.getInteger(i);
-        }
-        return result;
-    }
-
-    public static final String DISTANCE = "dist";
-
-    @NotNull
-    private static Integer getDistance(@NotNull JsonObject json) {
-        return json.getInteger(DISTANCE, 0);
+    public static long[] getEpoch(@NotNull JsonObject json) {
+        return toLongArray(json.getJsonArray(EPOCH));
     }
 
     @NotNull
@@ -127,20 +114,8 @@ public final class StopPredictions extends JsonBased {
     }
 
     @NotNull
-    public int[] getPredictions() {
+    public long[] getEpoch() {
         //noinspection ConstantConditions
-        return getPredictions(json);
-    }
-
-    public int getDistance() {
-        //noinspection ConstantConditions
-        return getDistance(json);
-    }
-
-    public void setDistance(int distance) {
-        if (distance < 0) {
-            throw new IllegalArgumentException("distance");
-        }
-        json.put(DISTANCE, distance);
+        return getEpoch(json);
     }
 }

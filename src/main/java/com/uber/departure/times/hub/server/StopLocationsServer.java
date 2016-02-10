@@ -36,7 +36,6 @@ public final class StopLocationsServer extends StopLocationClient {
     @PostConstruct
     protected void init() {
         super.init();
-        eventBus.consumer(GET_ADDRESS, this::getHandler);
         eventBus.consumer(GET_MANY_ADDRESS, this::getManyHandler);
         eventBus.consumer(ADD_ADDRESS, this::addHandler);
     }

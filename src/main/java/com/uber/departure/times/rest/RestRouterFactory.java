@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.uber.departure.times.common.pojo.Location;
-import com.uber.departure.times.common.pojo.StopsPredictions;
+import com.uber.departure.times.common.pojo.Predictions;
 import com.uber.departure.times.hub.client.PredictionsClient;
 
 import io.vertx.core.Future;
@@ -54,7 +54,7 @@ public final class RestRouterFactory {
             return;
         }
 
-        final Future<StopsPredictions> future = client.get(check.getResult());
+        final Future<Predictions> future = client.get(check.getResult());
 
         future.setHandler(r -> {
             if (r.succeeded()) {
@@ -66,7 +66,7 @@ public final class RestRouterFactory {
         });
     }
 
-    private void handleSuccess(@NotNull HttpServerResponse response, @NotNull StopsPredictions predictions) {
+    private void handleSuccess(@NotNull HttpServerResponse response, @NotNull Predictions predictions) {
         //noinspection unchecked
         response.putHeader("content-type", "application/json")
                 .setStatusCode(200)

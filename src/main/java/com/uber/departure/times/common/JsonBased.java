@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -30,8 +31,32 @@ public abstract class JsonBased implements JsonConvertible {
         return value != null && value.length != 0;
     }
 
+    protected static boolean validateNotNullNotEmpty(@Nullable long[] value) {
+        return value != null && value.length != 0;
+    }
+
     protected static boolean validateNotNullNonNegative(@Nullable Integer value) {
         return value != null && value >= 0;
+    }
+
+    @Nullable
+    protected static int[] toIntArray(@NotNull JsonArray jsonArray) {
+        final int size = jsonArray.size();
+        final int[] result = new int[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = jsonArray.getInteger(i);
+        }
+        return result;
+    }
+
+    @Nullable
+    protected static long[] toLongArray(@NotNull JsonArray jsonArray) {
+        final int size = jsonArray.size();
+        final long[] result = new long[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = jsonArray.getInteger(i);
+        }
+        return result;
     }
 
     @Override

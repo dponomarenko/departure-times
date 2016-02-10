@@ -11,7 +11,6 @@ import com.uber.departure.times.common.pojo.Cell;
 import com.uber.departure.times.common.pojo.Cells;
 import com.uber.departure.times.common.pojo.Stop;
 import com.uber.departure.times.common.pojo.Stops;
-import com.uber.departure.times.common.pojo.codec.CellMessageCodec;
 import com.uber.departure.times.common.pojo.codec.CellsMessageCodec;
 import com.uber.departure.times.common.pojo.codec.StopMessageCodec;
 import com.uber.departure.times.common.pojo.codec.StopsMessageCodec;
@@ -23,7 +22,6 @@ import io.vertx.core.eventbus.EventBus;
  * @author Danila Ponomarenko
  */
 public class StopLocationClient {
-    protected static final String GET_ADDRESS = "hub.locations.dao.get";
     protected static final String GET_MANY_ADDRESS = "hub.locations.dao.get.many";
     protected static final String ADD_ADDRESS = "hub.locations.dao.add";
 
@@ -32,23 +30,9 @@ public class StopLocationClient {
 
     @PostConstruct
     protected void init() {
-        eventBus.registerCodec(new StopMessageCodec());
-        eventBus.registerCodec(new StopsMessageCodec());
-        eventBus.registerCodec(new CellMessageCodec());
-        eventBus.registerCodec(new CellsMessageCodec());
-    }
-
-    @NotNull
-    public Future<Stops> get(@NotNull Cell key) {
-        final Future<Stops> result = Future.future();
-        eventBus.send(GET_ADDRESS, key, r -> {
-            if (r.succeeded()) {
-                result.complete((Stops) r.result().body());
-            } else {
-                result.fail(r.cause());
-            }
-        });
-        return result;
+        eventBus.registerDefaultCodec(Stop.class, new StopMessageCodec());
+        eventBus.registerDefaultCodec(Stops.class, new StopsMessageCodec());
+        eventBus.registerDefaultCodec(Cells.class, new CellsMessageCodec());
     }
 
     @NotNull

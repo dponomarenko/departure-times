@@ -29,9 +29,8 @@ public final class StopsStorageFactory {
     public AsyncMultiMap<Cell, Stop> create() {
         final HazelcastInstance hazelcast = Hazelcast.getAllHazelcastInstances().iterator().next();
         return new HazelcastMultiMap<>(
-                "hub.locations",
                 vertx,
-                hazelcast,
+                hazelcast.getMultiMap("hub.locations"),
                 Cell2StringSerializer.SERIALIZER,
                 Stop2StringSerializer.SERIALIZER
         );

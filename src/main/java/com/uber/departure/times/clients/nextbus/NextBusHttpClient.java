@@ -14,7 +14,8 @@ import com.uber.departure.times.clients.nextbus.parser.PredictionsParser;
 import com.uber.departure.times.clients.nextbus.parser.RouteTagsParser;
 import com.uber.departure.times.clients.nextbus.parser.StopsParser;
 import com.uber.departure.times.common.pojo.Route;
-import com.uber.departure.times.common.pojo.StopPredictions;
+import com.uber.departure.times.common.pojo.ProvidedPredictions;
+import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.common.pojo.Stops;
 
 import io.vertx.core.Future;
@@ -92,10 +93,10 @@ public final class NextBusHttpClient implements DataProviderClient {
 
     @NotNull
     @Override
-    public Future<StopPredictions> predict(@NotNull String agencyTag, @NotNull String routeTag, @NotNull String stopTag) {
-        final Future<StopPredictions> result = Future.future();
-        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_PREDICTIONS + "&a=" + agencyTag + "&r=" + routeTag + "&s=" + stopTag,
-                r -> responseHandler(r, result, b -> predictionsParser.parse(agencyTag, routeTag, stopTag, b))
+    public Future<ProvidedPredictions> predict(@NotNull StopId stopId) {
+        final Future<ProvidedPredictions> result = Future.future();
+        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_PREDICTIONS + "&a=" + stopId.getAgencyId() + "&r=" + stopId.getRouteId() + "&s=" + stopId.getStopId(),
+                r -> responseHandler(r, result, b -> predictionsParser.parse(stopId, b))
         );
         return result;
     }
