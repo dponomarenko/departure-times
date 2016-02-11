@@ -20,4 +20,8 @@ public final class HubConfiguration {
     public long getCacheTTLMs() {
         return context.config().getInteger("hub.predictions.cache.ttl.ms", 60000);
     }
+
+    public int maxPredictions(){
+        return context.config().getInteger("hub.predictions.max", 10);
+    }
 }

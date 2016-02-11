@@ -37,6 +37,9 @@ public final class PredictionsLoaderService {
         final Map<StopId, Future<ProvidedPredictions>> futures = new HashMap<>();
         for (StopId s : stops) {
             futures.put(s, map.computeIfAbsent(s, id -> dataProviderClient.predict(s), conf.getCacheTTLMs()));
+            if (futures.size() >= conf.maxPredictions()){
+                break;
+            }
         }
 
         if(futures.isEmpty()){
