@@ -84,14 +84,16 @@ public final class PredictionsServer extends PredictionsClient {
             for (Map.Entry<StopId, ProvidedPredictions> e : m.entrySet()) {
                 final StopId key = e.getKey();
                 final ProvidedPredictions value = e.getValue();
-                list.add(new Prediction(
-                        value.getAgency(),
-                        value.getRoute(),
-                        value.getStop(),
-                        value.getDirection(),
-                        stop2Distance.result().get(key).getValue(),
-                        predict(value.getEpoch())
-                ));
+                if (value != null) {
+                    list.add(new Prediction(
+                            value.getAgency(),
+                            value.getRoute(),
+                            value.getStop(),
+                            value.getDirection(),
+                            stop2Distance.result().get(key).getValue(),
+                            predict(value.getEpoch())
+                    ));
+                }
             }
             result.complete(new Predictions(list));
         }, result);
