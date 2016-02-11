@@ -1,0 +1,25 @@
+{
+  "predictions": {
+    "message": [
+      {
+        "text": "We're on Twitter: @sfmta_muni",
+        "priority": "Low"
+      },
+      {
+        "text": "1/23 - 2/11: Svc changes, detours downtown for Super Bowl events",
+        "priority": "Normal"
+      },
+      {
+        "text": "Visit sfmta.com for email & text alerts",
+        "priority": "Low"
+      }
+    ],
+    "agencyTitle": "San Francisco Muni",
+    "routeTag": "K_OWL",
+    "routeTitle": "K-Owl",
+    "stopTitle": "Ocean Ave & Lee St",
+    "stopTag": "5794",
+    "dirTitleBecauseNoPredictions": "Inbound to Embarcadero Station"
+  },
+  "copyright": "All data copyright San Francisco Muni 2016."
+}

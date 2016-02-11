@@ -49,11 +49,11 @@ public final class Prediction extends JsonBased {
 
     public static boolean validate(@NotNull JsonObject json) {
         Objects.requireNonNull(json, "json");
-        return validateNotNullNotEmpty(getAgency(json))
-                && validateNotNullNotEmpty(getRoute(json))
-                && validateNotNullNotEmpty(getStop(json))
-                && validateNotNullNotEmpty(getDirection(json))
-                && validateNotNullNotEmpty(getPredictions(json))
+        return validateNotNull(getAgency(json))
+                && validateNotNull(getRoute(json))
+                && validateNotNull(getStop(json))
+                && validateNotNull(getDirection(json))
+                && validateNotNull(getPredictions(json))
                 && validateNotNullNonNegative(getDistance(json));
     }
 

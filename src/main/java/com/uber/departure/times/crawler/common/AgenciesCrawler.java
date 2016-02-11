@@ -53,7 +53,7 @@ public final class AgenciesCrawler implements Publisher<Route> {
     }
 
     private void process(@NotNull String agencyTag, @NotNull Collection<String> tags) {
-        logger.error(tags.size() + " routes loaded for " + agencyTag);
+        logger.info(tags.size() + " routes loaded for " + agencyTag);
         for (String routeTag : tags) {
             eventBus.send(ROUTES_ADDRESS, new Route(agencyTag, routeTag));
         }

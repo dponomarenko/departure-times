@@ -22,6 +22,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClient;
+import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientResponse;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -34,9 +35,8 @@ public final class NextBusHttpClient implements DataProviderClient {
     private static final Logger logger = LoggerFactory.getLogger(NextBusHttpClient.class);
 
     private final HttpClient httpClient;
+    private final NextBusClientConfiguration conf;
 
-    @Autowired
-    private NextBusClientConfiguration conf;
     @Autowired
     private StopsParser stopsParser;
     @Autowired
@@ -47,8 +47,10 @@ public final class NextBusHttpClient implements DataProviderClient {
     private PredictionsParser predictionsParser;
 
     @Autowired
-    public NextBusHttpClient(@NotNull Vertx vertx) {
-        httpClient = Objects.requireNonNull(vertx, "vertx").createHttpClient();
+    public NextBusHttpClient(@NotNull Vertx vertx, @NotNull NextBusClientConfiguration conf) {
+        this.conf = conf;
+        httpClient = Objects.requireNonNull(vertx, "vertx")
+                .createHttpClient(new HttpClientOptions().setConnectTimeout(conf.getConnectionTimeout()));
     }
 
     protected static final String COMMAND = "command=";
@@ -108,7 +110,14 @@ public final class NextBusHttpClient implements DataProviderClient {
             logger.error("unexpected status-code:" + code + " message:" + response.statusMessage(), new Exception());
             f.fail("unexpected status-code:" + code);
         } else {
-            response.bodyHandler(b -> f.complete(responseParser.apply(b)));
+            response.bodyHandler(b -> {
+                try {
+                    f.complete(responseParser.apply(b));
+                } catch (Exception e) {
+                    logger.error("unexpected", e);
+                    f.fail(e);
+                }
+            });
         }
     }
 }

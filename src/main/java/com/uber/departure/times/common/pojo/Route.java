@@ -31,7 +31,7 @@ public final class Route extends JsonBased {
 
     public static boolean validate(@NotNull JsonObject json) {
         Objects.requireNonNull(json, "json");
-        return validateNotNullNotEmpty(getRouteTag(json)) && validateNotNullNotEmpty(getAgencyTag(json));
+        return validateNotNull(getRouteTag(json)) && validateNotNull(getAgencyTag(json));
     }
 
     public static final String ROUTE_TAG = "route-tag";

@@ -45,7 +45,7 @@ public final class RoutesCrawler {
     }
 
     private void process(@NotNull Route route, @NotNull Stops stops) {
-        logger.error(stops.size() + " stops loaded for agency:" + route.getAgencyTag() + " route:" + route.getRouteTag());
+        logger.info(stops.size() + " stops loaded for agency:" + route.getAgencyTag() + " route:" + route.getRouteTag());
         for (Stop stop : stops) {
             storage.add(stop);
         }

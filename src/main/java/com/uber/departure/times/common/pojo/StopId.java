@@ -36,9 +36,9 @@ public final class StopId extends JsonBased {
     public static boolean validate(@NotNull JsonObject json) {
         Objects.requireNonNull(json, "json");
         //noinspection ConstantConditions
-        return validateNotNullNotEmpty(getAgencyId(json))
-                && validateNotNullNotEmpty(getRouteId(json))
-                && validateNotNullNotEmpty(getStopId(json));
+        return validateNotNull(getAgencyId(json))
+                && validateNotNull(getRouteId(json))
+                && validateNotNull(getStopId(json));
     }
 
     public static final String AGENCY_ID = "agc";

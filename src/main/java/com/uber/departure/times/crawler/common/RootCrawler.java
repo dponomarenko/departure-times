@@ -46,7 +46,7 @@ public final class RootCrawler implements Publisher<String> {
     }
 
     private void process(@NotNull Collection<String> tags) {
-        logger.error(tags.size() + " agencies loaded");
+        logger.info(tags.size() + " agencies loaded");
         for (String tag : tags) {
             eventBus.send(AGENCIES_ADDRESS, tag);
         }

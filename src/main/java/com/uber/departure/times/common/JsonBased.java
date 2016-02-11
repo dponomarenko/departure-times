@@ -23,16 +23,16 @@ public abstract class JsonBased implements JsonConvertible {
         this(new JsonObject());
     }
 
-    protected static boolean validateNotNullNotEmpty(@Nullable String value) {
+    protected static boolean validateNotNull(@Nullable String value) {
         return value != null && !value.isEmpty();
     }
 
-    protected static boolean validateNotNullNotEmpty(@Nullable int[] value) {
-        return value != null && value.length != 0;
+    protected static boolean validateNotNull(@Nullable int[] value) {
+        return value != null;
     }
 
-    protected static boolean validateNotNullNotEmpty(@Nullable long[] value) {
-        return value != null && value.length != 0;
+    protected static boolean validateNotNull(@Nullable long[] value) {
+        return value != null;
     }
 
     protected static boolean validateNotNullNonNegative(@Nullable Integer value) {

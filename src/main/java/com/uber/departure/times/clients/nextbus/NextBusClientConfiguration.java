@@ -27,4 +27,8 @@ public final class NextBusClientConfiguration {
     public int getNextBusPort() {
         return context.config().getInteger("client.nextbus.port", 80);
     }
+
+    public int getConnectionTimeout() {
+        return context.config().getInteger("client.nextbus.timeout", 1000);
+    }
 }
