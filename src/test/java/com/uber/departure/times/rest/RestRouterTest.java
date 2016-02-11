@@ -34,17 +34,18 @@ public final class RestRouterTest extends AVertxTestClass {
     private HttpClient httpClient;
     @Autowired
     private TestStorage storage;
+    @Autowired
+    private RestConfiguration conf;
 
 
     private static final String HOST = "localhost";
-    private static final int PORT = 8080;
     private static final String URI = "/departure-times/api/v1/predictions";
 
     @Test
     public void testNoArgs() {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> f = Future.future();
-        httpClient.getNow(PORT, HOST, URI, f::complete);
+        httpClient.getNow(conf.getHttpPort(), HOST, URI, f::complete);
         final HttpClientResponse response = FutureHelper.wait(f);
         Assert.assertThat(response.getHeader("content-type"), is(equalTo("application/json")));
         Assert.assertThat(response.statusCode(), is(equalTo(400)));
@@ -54,7 +55,7 @@ public final class RestRouterTest extends AVertxTestClass {
     public void testOnlyLat() {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> f = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lat=0", f::complete);
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lat=0", f::complete);
         final HttpClientResponse response = FutureHelper.wait(f);
         Assert.assertThat(response.getHeader("content-type"), is(equalTo("application/json")));
         Assert.assertThat(response.statusCode(), is(equalTo(400)));
@@ -64,7 +65,7 @@ public final class RestRouterTest extends AVertxTestClass {
     public void testOnlyLon() {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> f = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lon=0", f::complete);
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lon=0", f::complete);
         final HttpClientResponse response = FutureHelper.wait(f);
         Assert.assertThat(response.getHeader("content-type"), is(equalTo("application/json")));
         Assert.assertThat(response.statusCode(), is(equalTo(400)));
@@ -74,7 +75,7 @@ public final class RestRouterTest extends AVertxTestClass {
     public void testWrongLat() {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> f = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lat=1000&lon=0", f::complete);
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lat=1000&lon=0", f::complete);
         final HttpClientResponse response = FutureHelper.wait(f);
         Assert.assertThat(response.getHeader("content-type"), is(equalTo("application/json")));
         Assert.assertThat(response.statusCode(), is(equalTo(400)));
@@ -84,7 +85,7 @@ public final class RestRouterTest extends AVertxTestClass {
     public void testWrongLon() {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> f = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lat=0&lon=1000", f::complete);
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lat=0&lon=1000", f::complete);
         final HttpClientResponse response = FutureHelper.wait(f);
         Assert.assertThat(response.getHeader("content-type"), is(equalTo("application/json")));
         Assert.assertThat(response.statusCode(), is(equalTo(400)));
@@ -96,7 +97,7 @@ public final class RestRouterTest extends AVertxTestClass {
         FutureHelper.wait(connector.startFuture());
         final Future<HttpClientResponse> responseFuture = Future.future();
         final Future<Buffer> bodyFuture = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lat=0&lon=0", r -> {
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lat=0&lon=0", r -> {
             r.bodyHandler(bodyFuture::complete);
             responseFuture.complete(r);
         });
@@ -120,7 +121,7 @@ public final class RestRouterTest extends AVertxTestClass {
 
         final Future<HttpClientResponse> responseFuture = Future.future();
         final Future<Buffer> bodyFuture = Future.future();
-        httpClient.getNow(PORT, HOST, URI + "?lat=" + location.getLatitude() + "&lon=" + location.getLongitude(), r -> {
+        httpClient.getNow(conf.getHttpPort(), HOST, URI + "?lat=" + location.getLatitude() + "&lon=" + location.getLongitude(), r -> {
             r.bodyHandler(bodyFuture::complete);
             responseFuture.complete(r);
         });

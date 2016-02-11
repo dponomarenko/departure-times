@@ -54,7 +54,7 @@ public abstract class JsonBased implements JsonConvertible {
         final int size = jsonArray.size();
         final long[] result = new long[size];
         for (int i = 0; i < size; i++) {
-            result[i] = jsonArray.getInteger(i);
+            result[i] = jsonArray.getLong(i);
         }
         return result;
     }

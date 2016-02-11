@@ -43,6 +43,6 @@ public final class PredictionsServerTest extends AVertxTestClass {
         final Predictions result = FutureHelper.wait(client.get(stop.getLocation()));
         Assert.assertThat(result.size(), is(equalTo(1)));
         final Prediction p = result.iterator().next();
-        Assert.assertThat(p.getPredictions()[0], is(equalTo(5)));
+        Assert.assertThat(p.getPredictions()[0], is(equalTo(4)));
         }
     }
