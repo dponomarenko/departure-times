@@ -1,0 +1,38 @@
+{
+  "predictions": {
+    "message": [
+      {
+        "text": "We're on Twitter: @sfmta_muni",
+        "priority": "Low"
+      },
+      {
+        "text": "1/23 - 2/11: Svc changes, detours downtown for Super Bowl events",
+        "priority": "Normal"
+      },
+      {
+        "text": "Visit sfmta.com for email & text alerts",
+        "priority": "Low"
+      }
+    ],
+    "agencyTitle": "San Francisco Muni",
+    "routeTag": "29",
+    "routeTitle": "29-Sunset",
+    "direction": {
+      "title": "Outbound to the Bayview District",
+      "prediction": {
+        "isDeparture": "false",
+        "minutes": "60",
+        "seconds": "3611",
+        "tripTag": "6705658",
+        "vehicle": "8659",
+        "affectedByLayover": "true",
+        "block": "2901",
+        "dirTag": "29___O_F00",
+        "epochTime": "1455201246212"
+      }
+    },
+    "stopTitle": "Plymouth Ave & Ocean Ave",
+    "stopTag": "5974"
+  },
+  "copyright": "All data copyright San Francisco Muni 2016."
+}

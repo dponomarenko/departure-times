@@ -13,7 +13,7 @@ import io.vertx.core.json.JsonObject;
 @Component
 public final class AgencyTagsParser extends AJsonParser<String> {
     private AgencyTagsParser() {
-        super(json -> json.getJsonArray("agency"), HashSet::new);
+        super(json -> toArray(json, "agency"), HashSet::new);
     }
 
     @NotNull

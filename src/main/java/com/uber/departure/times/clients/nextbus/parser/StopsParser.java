@@ -25,13 +25,12 @@ public final class StopsParser {
         final JsonObject json = buffer.toJsonObject();
         final Collection<Stop> result = new ArrayList<>();
         final JsonObject routeJson = json.getJsonObject("route");
-        if (routeJson == null){
+        if (routeJson == null) {
             return Stops.empty();
         }
-        final JsonArray stop = routeJson.getJsonArray("stop");
-        if (stop == null){
-            return Stops.empty();
-        }
+
+
+        final JsonArray stop = AJsonParser.toArray(routeJson,"stop");
         for (Object o : stop) {
             result.add(parse(route, o));
         }

@@ -35,4 +35,19 @@ public abstract class AJsonParser<T> implements Function<Buffer, Collection<T>> 
 
     @NotNull
     protected abstract T parse(@NotNull Object o);
+
+
+    @NotNull
+    //nextbus api bug: when there is only one route it returns object instead of array
+    public static JsonArray toArray(@NotNull JsonObject json, @NotNull String key) {
+        final Object o = json.getValue(key);
+        if (o == null) {
+            return new JsonArray();
+        }
+        if (o instanceof JsonArray) {
+            return (JsonArray) o;
+        } else {
+            return new JsonArray().add(o);
+        }
+    }
 }

@@ -35,9 +35,23 @@ public final class PredictionsParserTest extends AParserTestClass {
             new long[0]
     );
 
+    private static final ProvidedPredictions LONE_PREDICTIONS = new ProvidedPredictions(
+            "San Francisco Muni",
+            "29-Sunset",
+            "Plymouth Ave & Ocean Ave",
+            "Outbound to the Bayview District",
+            new long[]{1455201246212L}
+    );
+
     @Test
     public void testNoPredictions() throws IOException {
         final ProvidedPredictions predictions = parser.parse(DataProviderMockFactory.AC_TRANSIT_39_5194_STOP_ID, Buffer.buffer(load("json/no-predictions.json")));
         Assert.assertThat(predictions, is(equalTo(NO_PREDICTIONS)));
+    }
+
+    @Test
+    public void testLonePrediction() throws IOException {
+        final ProvidedPredictions predictions = parser.parse(DataProviderMockFactory.AC_TRANSIT_39_5194_STOP_ID, Buffer.buffer(load("json/lone-prediction.json")));
+        Assert.assertThat(predictions, is(equalTo(LONE_PREDICTIONS)));
     }
 }
