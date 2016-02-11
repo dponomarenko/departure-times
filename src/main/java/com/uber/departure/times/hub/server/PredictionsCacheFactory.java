@@ -34,8 +34,7 @@ public final class PredictionsCacheFactory {
                 vertx,
                 hazelcast.getMap("hub.predictions.cache"),
                 StopId2StringSerializer.SERIALIZER,
-                ProvidedPredictions2StringSerializer.SERIALIZER,
-                conf.getCacheLockTimeoutMs()
+                ProvidedPredictions2StringSerializer.SERIALIZER
         );
     }
 }

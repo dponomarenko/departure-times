@@ -20,8 +20,4 @@ public final class HubConfiguration {
     public long getCacheTTLMs() {
         return context.config().getInteger("hub.predictions.cache.ttl.ms", 60000);
     }
-
-    public long getCacheLockTimeoutMs() {
-        return context.config().getInteger("hub.predictions.cache.lock.ms", 100);
-    }
 }

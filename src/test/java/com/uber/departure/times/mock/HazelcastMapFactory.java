@@ -29,8 +29,7 @@ public final class HazelcastMapFactory {
                 vertx,
                 hazelcast.getMap("hazelcast.test.map"),
                 String2StringSerializer.SERIALIZER,
-                String2StringSerializer.SERIALIZER,
-                200
+                String2StringSerializer.SERIALIZER
         );
     }
 }

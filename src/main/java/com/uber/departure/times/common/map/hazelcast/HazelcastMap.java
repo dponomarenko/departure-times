@@ -21,14 +21,11 @@ public final class HazelcastMap<K, KM, V, VM> implements AsyncMap<K, V> {
     private final IMap<KM, VM> map;
     private final Serializer<K, KM> keySerializer;
     private final Serializer<V, VM> valueSerializer;
-    private final long lockTimeMs;
 
     public HazelcastMap(@NotNull Vertx vertx,
                         @NotNull IMap<KM, VM> map,
                         @NotNull Serializer<K, KM> keySerializer,
-                        @NotNull Serializer<V, VM> valueSerializer,
-                        long lockTimeMs) {
-        this.lockTimeMs = lockTimeMs;
+                        @NotNull Serializer<V, VM> valueSerializer) {
         this.map = Objects.requireNonNull(map, "map");
         this.vertx = Objects.requireNonNull(vertx, "vertx");
         this.keySerializer = Objects.requireNonNull(keySerializer, "keySerializer");
@@ -76,18 +73,13 @@ public final class HazelcastMap<K, KM, V, VM> implements AsyncMap<K, V> {
     }
 
     private Future<V> computeIfAbsent(@NotNull K key, @NotNull Function<K, Future<V>> f, @NotNull IMap<KM, VM> map, long ttlMs) {
-        final KM mKey = keySerializer.to(key);
-
-        map.lock(mKey, lockTimeMs, TimeUnit.MILLISECONDS);
         final Future<V> result = Future.future();
         final V value = get(key, map);
         if (value != null) {
-            map.unlock(mKey);
             result.complete(value);
         } else {
             f.apply(key).compose(v -> {
                 put(key, v, ttlMs);
-                map.unlock(mKey);
                 result.complete(v);
             }, result);
         }
