@@ -14,6 +14,6 @@ public final class RestConfiguration {
     private Context context;
 
     public int getHttpPort() {
-        return context.config().getInteger("rest.http.port", 8080);
+        return context.config().getInteger("rest.http.port", 8081);
     }
 }
