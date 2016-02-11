@@ -13,8 +13,8 @@ import com.uber.departure.times.clients.nextbus.parser.AgencyTagsParser;
 import com.uber.departure.times.clients.nextbus.parser.PredictionsParser;
 import com.uber.departure.times.clients.nextbus.parser.RouteTagsParser;
 import com.uber.departure.times.clients.nextbus.parser.StopsParser;
-import com.uber.departure.times.common.pojo.Route;
 import com.uber.departure.times.common.pojo.ProvidedPredictions;
+import com.uber.departure.times.common.pojo.Route;
 import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.common.pojo.Stops;
 
@@ -59,7 +59,7 @@ public final class NextBusHttpClient implements DataProviderClient {
     @Override
     public Future<Collection<String>> getAgencyTags() {
         final Future<Collection<String>> result = Future.future();
-        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_AGENCY_LIST,
+        httpClient.getNow(conf.getNextBusPort(), conf.getNextBusHost(), conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_AGENCY_LIST,
                 r -> responseHandler(r, result, agencyTagsParser)
         );
         return result;
@@ -71,7 +71,7 @@ public final class NextBusHttpClient implements DataProviderClient {
     @Override
     public Future<Collection<String>> getRouteTags(@NotNull String agencyTag) {
         final Future<Collection<String>> result = Future.future();
-        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_ROUTE_LIST + "&a=" + agencyTag,
+        httpClient.getNow(conf.getNextBusPort(), conf.getNextBusHost(), conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_ROUTE_LIST + "&a=" + agencyTag,
                 r -> responseHandler(r, result, routeTagsParser)
         );
         return result;
@@ -83,7 +83,7 @@ public final class NextBusHttpClient implements DataProviderClient {
     @Override
     public Future<Stops> getStops(@NotNull Route route) {
         final Future<Stops> result = Future.future();
-        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_ROUTE_CONFIG + "&a=" + route.getAgencyTag() + "&r=" + route.getRouteTag() + "&terse",
+        httpClient.getNow(conf.getNextBusPort(), conf.getNextBusHost(), conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_ROUTE_CONFIG + "&a=" + route.getAgencyTag() + "&r=" + route.getRouteTag() + "&terse",
                 r -> responseHandler(r, result, b -> stopsParser.parse(route, b))
         );
         return result;
@@ -95,7 +95,7 @@ public final class NextBusHttpClient implements DataProviderClient {
     @Override
     public Future<ProvidedPredictions> predict(@NotNull StopId stopId) {
         final Future<ProvidedPredictions> result = Future.future();
-        httpClient.getNow(conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_PREDICTIONS + "&a=" + stopId.getAgencyId() + "&r=" + stopId.getRouteId() + "&s=" + stopId.getStopId(),
+        httpClient.getNow(conf.getNextBusPort(), conf.getNextBusHost(), conf.getNextBusFeedURI() + '?' + COMMAND + COMMAND_PREDICTIONS + "&a=" + stopId.getAgencyId() + "&r=" + stopId.getRouteId() + "&s=" + stopId.getStopId(),
                 r -> responseHandler(r, result, b -> predictionsParser.parse(stopId, b))
         );
         return result;

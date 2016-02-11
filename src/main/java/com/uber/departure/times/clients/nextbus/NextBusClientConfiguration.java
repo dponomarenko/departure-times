@@ -16,6 +16,15 @@ public final class NextBusClientConfiguration {
 
     @NotNull
     public String getNextBusFeedURI() {
-        return context.config().getString("client.nextbus.host", "http://webservices.nextbus.com/service/publicJSONFeed");
+        return context.config().getString("client.nextbus.uri", "/service/publicJSONFeed");
+    }
+
+    @NotNull
+    public String getNextBusHost() {
+        return context.config().getString("client.nextbus.host", "webservices.nextbus.com");
+    }
+
+    public int getNextBusPort() {
+        return context.config().getInteger("client.nextbus.port", 80);
     }
 }
