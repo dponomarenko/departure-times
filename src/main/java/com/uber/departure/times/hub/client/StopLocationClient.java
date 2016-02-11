@@ -6,7 +6,9 @@ import javax.annotation.PostConstruct;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.uber.departure.times.common.component.MessageCodecRegistrar;
 import com.uber.departure.times.common.pojo.Cell;
 import com.uber.departure.times.common.pojo.Cells;
 import com.uber.departure.times.common.pojo.Stop;
@@ -21,18 +23,21 @@ import io.vertx.core.eventbus.EventBus;
 /**
  * @author Danila Ponomarenko
  */
+@Component
 public class StopLocationClient {
     protected static final String GET_MANY_ADDRESS = "hub.locations.dao.get.many";
     protected static final String ADD_ADDRESS = "hub.locations.dao.add";
 
     @Autowired
     protected EventBus eventBus;
+    @Autowired
+    private MessageCodecRegistrar registrar;
 
     @PostConstruct
     protected void init() {
-        eventBus.registerDefaultCodec(Stop.class, new StopMessageCodec());
-        eventBus.registerDefaultCodec(Stops.class, new StopsMessageCodec());
-        eventBus.registerDefaultCodec(Cells.class, new CellsMessageCodec());
+        registrar.register(Stop.class, new StopMessageCodec());
+        registrar.register(Stops.class, new StopsMessageCodec());
+        registrar.register(Cells.class, new CellsMessageCodec());
     }
 
     @NotNull

@@ -3,9 +3,9 @@ package com.uber.departure.times.common;
 import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.StaticApplicationContext;
 
 import io.vertx.core.Future;
 
@@ -13,7 +13,7 @@ import io.vertx.core.Future;
  * @author Danila Ponomarenko
  */
 public abstract class SpringVerticle extends StartupLoggingVerticle {
-    private AbstractApplicationContext context;
+    private AbstractApplicationContext spring;
     private String contextName;
     private SpringVerticleConnector connector;
 
@@ -24,15 +24,15 @@ public abstract class SpringVerticle extends StartupLoggingVerticle {
     @Override
     protected void startOverride(Future<Void> startFuture) throws Exception {
         connector = new SpringVerticleConnector();
-        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(createVertxContext(connector));
-        context.setId(contextName);
-        context.getEnvironment().setActiveProfiles("production");
-        context.setConfigLocation(contextName);
+        final ClassPathXmlApplicationContext spring = new ClassPathXmlApplicationContext(createVertxContext(connector));
+        spring.setId(contextName);
+        spring.getEnvironment().setActiveProfiles("production");
+        spring.setConfigLocation(contextName);
 
-        context.refresh();
+        spring.refresh();
 
-        context.start();
-        this.context = context;
+        spring.start();
+        this.spring = spring;
         connector.startFuture().compose(e -> startFuture.complete(), startFuture);
     }
 
@@ -43,18 +43,19 @@ public abstract class SpringVerticle extends StartupLoggingVerticle {
 
     @NotNull
     private AbstractApplicationContext createVertxContext(@NotNull SpringVerticleConnector connector) {
-        final StaticApplicationContext context = new StaticApplicationContext();
-        context.refresh();
-        context.getBeanFactory().registerSingleton(VERTX_BEAN, vertx);
-        context.getBeanFactory().registerSingleton(VERTX_CONTEXT_BEAN, context);
-        context.getBeanFactory().registerSingleton(EVENT_BUS_BEAN, vertx.eventBus());
-        context.getBeanFactory().registerSingleton(CONNECTOR_BEAN, connector);
-        return context;
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.getBeanFactory().registerSingleton(VERTX_BEAN, vertx);
+        ctx.getBeanFactory().registerSingleton(VERTX_CONTEXT_BEAN, context);
+        ctx.getBeanFactory().registerSingleton(EVENT_BUS_BEAN, vertx.eventBus());
+        ctx.getBeanFactory().registerSingleton(CONNECTOR_BEAN, connector);
+        ctx.refresh();
+
+        return ctx;
     }
 
     @Override
     protected void stopOverride(Future<Void> stopFuture) throws Exception {
-        context.destroy();
+        spring.destroy();
         connector.stopFuture().compose(e -> stopFuture.complete(), stopFuture);
     }
 }

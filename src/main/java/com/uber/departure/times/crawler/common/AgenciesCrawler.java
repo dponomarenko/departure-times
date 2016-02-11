@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.uber.departure.times.clients.DataProviderClient;
 import com.uber.departure.times.common.Publisher;
+import com.uber.departure.times.common.component.MessageCodecRegistrar;
 import com.uber.departure.times.common.pojo.Route;
 import com.uber.departure.times.common.pojo.codec.RouteMessageCodec;
 
@@ -34,10 +35,12 @@ public final class AgenciesCrawler implements Publisher<Route> {
     private Publisher<String> agencies;
     @Autowired
     private EventBus eventBus;
+    @Autowired
+    private MessageCodecRegistrar registrar;
 
     @PostConstruct
     private void init() {
-        eventBus.registerDefaultCodec(Route.class, new RouteMessageCodec());
+        registrar.register(Route.class, new RouteMessageCodec());
         agencies.subscribe(this::accept);
     }
 

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uber.departure.times.common.component.MessageCodecRegistrar;
 import com.uber.departure.times.common.pojo.Location;
 import com.uber.departure.times.common.pojo.Predictions;
 import com.uber.departure.times.common.pojo.codec.LocationMessageCodec;
@@ -23,11 +24,13 @@ public class PredictionsClient {
 
     @Autowired
     protected EventBus eventBus;
+    @Autowired
+    private MessageCodecRegistrar registrar;
 
     @PostConstruct
     protected void init() {
-        eventBus.registerDefaultCodec(Predictions.class, new PredictionsMessageCodec());
-        eventBus.registerDefaultCodec(Location.class, new LocationMessageCodec());
+        registrar.register(Predictions.class, new PredictionsMessageCodec());
+        registrar.register(Location.class, new LocationMessageCodec());
     }
 
     @NotNull

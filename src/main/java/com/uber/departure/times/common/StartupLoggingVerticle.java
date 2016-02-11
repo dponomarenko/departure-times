@@ -17,6 +17,7 @@ public abstract class StartupLoggingVerticle extends AbstractVerticle {
         startFuture.setHandler(r -> {
             logger.info("VERTICLE " + this.getClass().getSimpleName() + " started in " + (System.currentTimeMillis() - startMillis) + "ms.");
         });
+        startOverride(startFuture);
     }
 
     @Override
@@ -25,6 +26,7 @@ public abstract class StartupLoggingVerticle extends AbstractVerticle {
         stopFuture.setHandler(r -> {
             logger.info("VERTICLE " + this.getClass().getSimpleName() + " stopped in " + (System.currentTimeMillis() - startMillis) + "ms.");
         });
+        stopOverride(stopFuture);
     }
 
     protected void startOverride(Future<Void> startFuture) throws Exception {

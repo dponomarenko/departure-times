@@ -25,11 +25,17 @@ public final class SpringVerticleConnector {
 
     @NotNull
     public Future<CompositeFuture> startFuture() {
+        if (start.isEmpty()){
+            return Future.succeededFuture();
+        }
         return CompositeFuture.all(start);
     }
 
     @NotNull
     public Future<CompositeFuture> stopFuture() {
+        if (stop.isEmpty()){
+            return Future.succeededFuture();
+        }
         return CompositeFuture.all(stop);
     }
 }
