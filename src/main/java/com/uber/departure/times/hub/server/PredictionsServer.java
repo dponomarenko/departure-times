@@ -23,12 +23,16 @@ import com.uber.departure.times.hub.client.PredictionsClient;
 
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 
 /**
  * @author Danila Ponomarenko
  */
 @Component
 public final class PredictionsServer extends PredictionsClient {
+    private static final Logger logger = LoggerFactory.getLogger(PredictionsServer.class);
+
     @Autowired
     private NearbyStopsService nearbyStopsService;
     @Autowired
@@ -42,13 +46,15 @@ public final class PredictionsServer extends PredictionsClient {
     }
 
     private void getDepartures(@NotNull Message<Location> message) {
-        final Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance = nearbyStopsService.detect(message.body());
+        final Location location = message.body();
+        final Future<Map<StopId, Pair<Stop, Integer>>> stop2Distance = nearbyStopsService.detect(location);
         final Future<Map<StopId, ProvidedPredictions>> predictions = load(getIds(stop2Distance));
         final Future<Predictions> result = setDistances(stop2Distance, predictions);
         result.setHandler(r -> {
             if (r.succeeded()) {
                 message.reply(r.result());
             } else {
+                logger.error("getDepartures for " + location, r.cause());
                 message.fail(1, "failed to get departures");
             }
         });
