@@ -37,12 +37,12 @@ public final class PredictionsServerTest extends AVertxTestClass {
     @Test
     public void testPredictedData() {
         final Stop stop = EntityHelper.randomStop();
-        final ProvidedPredictions predictions = new ProvidedPredictions("agency", "route", "stop", "direction", new long[]{TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + TimeUnit.MINUTES.toSeconds(5)});
+        final ProvidedPredictions predictions = new ProvidedPredictions("agency", "route", "stop", "direction", new long[]{System.currentTimeMillis()) + TimeUnit.MINUTES.toMillis(5);
         storage.addSync(stop, predictions);
 
         final Predictions result = FutureHelper.wait(client.get(stop.getLocation()));
         Assert.assertThat(result.size(), is(equalTo(1)));
         final Prediction p = result.iterator().next();
         Assert.assertThat(p.getPredictions()[0], is(equalTo(5)));
+        }
     }
-}

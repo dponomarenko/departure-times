@@ -105,7 +105,7 @@ public final class PredictionsServer extends PredictionsClient {
         final int size = epoch.length;
         final int[] result = new int[size];
         for (int i = 0; i < size; i++) {
-            result[i] = (int) TimeUnit.SECONDS.toMinutes(epoch[i] - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+            result[i] = (int) TimeUnit.MILLISECONDS.toMinutes(epoch[i] - System.currentTimeMillis());
         }
         return result;
     }
