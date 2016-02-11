@@ -101,6 +101,8 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+<<<<<<< HEAD
+            <scope>test</scope>
             <version>${mockito.version}</version>
         </dependency>
     </dependencies>
