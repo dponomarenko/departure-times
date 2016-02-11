@@ -13,6 +13,7 @@ import com.uber.departure.times.common.pojo.StopId;
 import com.uber.departure.times.common.pojo.Stops;
 
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -23,7 +24,15 @@ public final class StopsParser {
     public Stops parse(@NotNull Route route, @NotNull Buffer buffer) {
         final JsonObject json = buffer.toJsonObject();
         final Collection<Stop> result = new ArrayList<>();
-        for (Object o : json.getJsonObject("route").getJsonArray("stop")) {
+        final JsonObject routeJson = json.getJsonObject("route");
+        if (routeJson == null){
+            return Stops.empty();
+        }
+        final JsonArray stop = routeJson.getJsonArray("stop");
+        if (stop == null){
+            return Stops.empty();
+        }
+        for (Object o : stop) {
             result.add(parse(route, o));
         }
         return new Stops(result);

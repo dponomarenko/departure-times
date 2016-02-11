@@ -114,7 +114,7 @@ public final class NextBusHttpClient implements DataProviderClient {
                 try {
                     f.complete(responseParser.apply(b));
                 } catch (Exception e) {
-                    logger.error("unexpected", e);
+                    logger.error("unexpected response: " + b.toString(), e);
                     f.fail(e);
                 }
             });
